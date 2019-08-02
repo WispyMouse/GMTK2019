@@ -5,16 +5,13 @@ using UnityEngine;
 public class PlayerMob : MonoBehaviour
 {
     const float MovementSpeed = 6.5f;
-    Vector3 CameraOffset { get; set; } = Vector3.up * 15f + Vector3.back * 5f;
 
     void Update()
     {
-        HandleMovement();
-    }
-
-    private void LateUpdate()
-    {
-        HandleCamera();
+        if (PhaseManager.CurrentGameState == GameState.Movement)
+        {
+            HandleMovement();
+        }
     }
 
     void HandleMovement()
@@ -47,10 +44,5 @@ public class PlayerMob : MonoBehaviour
         movementInput.Normalize();
 
         transform.position = transform.position + movementInput * Time.deltaTime * MovementSpeed;
-    }
-
-    void HandleCamera()
-    {
-        Camera.main.transform.position = transform.position + CameraOffset;
     }
 }
