@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMob : MonoBehaviour
 {
     const float MovementSpeed = 6.5f;
+    const float ExhaustionMovementSpeed = .25f;
 
     public PhaseManager PhaseManagerInstance;
     float HurtAnimationTime { get; } = .6f;
@@ -14,6 +15,8 @@ public class PlayerMob : MonoBehaviour
     public float PlayerMaxHealth { get; } = 100f;
     public float PlayerHealth { get; private set; }
     public SpriteRenderer PlayerSpriteRenderer;
+    public Sprite PlayerWizardDefeatedSprite;
+    public Sprite PlayerWizardExhaustedSprite;
 
     private void Awake()
     {
@@ -22,12 +25,17 @@ public class PlayerMob : MonoBehaviour
 
     void Update()
     {
-        if (PhaseManager.CurrentGameState == GameState.Movement)
+        switch (PhaseManager.CurrentGameState)
         {
-            HandleMovement();
+            case GameState.Movement:
+            case GameState.Exhaustion:
+                HandleMovement();
+                HandleHurtTime();
+                break;
+            default:
+                PlayerSpriteRenderer.enabled = true;
+                break;
         }
-
-        HandleHurtTime();
     }
 
     void HandleMovement()
@@ -59,11 +67,18 @@ public class PlayerMob : MonoBehaviour
 
         movementInput.Normalize();
 
-        transform.position = transform.position + movementInput * Time.deltaTime * MovementSpeed;
+        float curMovementSpeed = MovementSpeed;
+
+        if (PhaseManager.CurrentGameState == GameState.Exhaustion)
+        {
+            curMovementSpeed = ExhaustionMovementSpeed;
+        }
+
+        transform.position = transform.position + movementInput * Time.deltaTime * curMovementSpeed;
     }
 
     void HandleHurtTime()
-    {
+    {        
         if (CurHurtTime > 0)
         {
             float curBlinkTime = CurHurtTime % HurtBlinkInterval * 2f;
@@ -95,7 +110,27 @@ public class PlayerMob : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
-        PlayerHealth = Mathf.Max(PlayerHealth - amount, 0);
-        CurHurtTime = HurtAnimationTime;
+        if (PhaseManager.CurrentGameState == GameState.Movement)
+        {
+            PlayerHealth = Mathf.Max(PlayerHealth - amount, 0);
+            CurHurtTime = HurtAnimationTime;
+
+            if (PlayerHealth <= 0)
+            {
+                PlayerSpriteRenderer.sprite = PlayerWizardDefeatedSprite;
+                PhaseManagerInstance.PlayerIsDefeated();
+            }
+        }
+        else if(PhaseManager.CurrentGameState == GameState.Exhaustion)
+        {
+            PlayerHealth = 0;
+            PlayerSpriteRenderer.sprite = PlayerWizardDefeatedSprite;
+            PhaseManagerInstance.PlayerIsDefeated();
+        }
+    }
+
+    public void ExhaustionState()
+    {
+        PlayerSpriteRenderer.sprite = PlayerWizardExhaustedSprite;
     }
 }

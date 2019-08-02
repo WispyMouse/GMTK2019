@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum GameState { Movement, Explosion }
+public enum GameState { Movement, Explosion, Defeated, Exhaustion }
 public class PhaseManager : MonoBehaviour
 {
     public static GameState CurrentGameState { get; set; } = GameState.Movement;
@@ -15,10 +15,10 @@ public class PhaseManager : MonoBehaviour
 
     Vector3 CameraOffsetFromPlayer { get; } = Vector3.up * 10f + Vector3.back * 2.5f;
     Vector3 CameraOffsetFromExplosionCursor { get; } = Vector3.up * 2f + Vector3.back * 10f;
-    float TimeForExplosionCursorCameraApproach { get; } = 1.4f;
+    float TimeForExplosionCursorCameraApproach { get; } = .7f;
     float StandardCameraDownTilt { get; } = 70f;
     float ExplosionCameraDowntilt { get; } = 5f;
-    float TimeForReturnToPlayerCameraApproach { get; } = .8f;
+    float TimeForReturnToPlayerCameraApproach { get; } = .5f;
 
     float ExplosionScale { get; set; } = 4f;
 
@@ -34,9 +34,14 @@ public class PhaseManager : MonoBehaviour
         }
         else
         {
-            if (CurrentGameState == GameState.Movement)
+            switch (CurrentGameState)
             {
-                HandleRuneCursor();
+                case GameState.Movement:
+                    HandleRuneCursor();
+                    break;
+                default:
+                    RuneCursorInstance.gameObject.SetActive(false);
+                    break;
             }
         }
     }
@@ -141,6 +146,12 @@ public class PhaseManager : MonoBehaviour
         Camera.main.transform.position = targetPosition;
         Camera.main.transform.rotation = Quaternion.Euler(StandardCameraDownTilt, 0, 0);
 
-        CurrentGameState = GameState.Movement;
+        CurrentGameState = GameState.Exhaustion;
+        PlayerMobInstance.ExhaustionState();
+    }
+
+    public void PlayerIsDefeated()
+    {
+        CurrentGameState = GameState.Defeated;
     }
 }

@@ -33,11 +33,14 @@ public class EnemyCrab : MonoBehaviour
 
     private void Update()
     {
-        if (PhaseManager.CurrentGameState == GameState.Movement)
+        switch (PhaseManager.CurrentGameState)
         {
-            HandleMovement();
-            return;
-        }        
+            case GameState.Movement:
+            case GameState.Defeated:
+            case GameState.Exhaustion:
+                HandleMovement();
+                return;
+        }     
     }
 
     void HandleMovement()
@@ -102,6 +105,11 @@ public class EnemyCrab : MonoBehaviour
 
     void HurtPlayer(PlayerMob playerMobInstance)
     {
+        if (PhaseManager.CurrentGameState != GameState.Movement && PhaseManager.CurrentGameState != GameState.Exhaustion)
+        {
+            return;
+        }
+
         if (!EnemyActive)
         {
             return;
