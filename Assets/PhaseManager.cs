@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum GameState { Movement, Explosion, Defeated, Exhaustion }
+public enum GameState { Movement, Explosion, Defeated, Exhaustion, Safe }
 public class PhaseManager : MonoBehaviour
 {
     public static GameState CurrentGameState { get; set; } = GameState.Movement;
@@ -13,6 +13,9 @@ public class PhaseManager : MonoBehaviour
     public LayerMask FloorMask;
     public LayerMask EnemyMask;
 
+    public Image WaitCircle;
+    public Transform KOTimeHud;
+
     Vector3 CameraOffsetFromPlayer { get; } = Vector3.up * 10f + Vector3.back * 2.5f;
     Vector3 CameraOffsetFromExplosionCursor { get; } = Vector3.up * 2f + Vector3.back * 10f;
     float TimeForExplosionCursorCameraApproach { get; } = .7f;
@@ -21,8 +24,15 @@ public class PhaseManager : MonoBehaviour
     float TimeForReturnToPlayerCameraApproach { get; } = .5f;
 
     float ExplosionScale { get; set; } = 4f;
+    float CurKOTime { get; set; } = 0;
+    float KOTime { get; } = 4f;
 
     public Slider HealthSlider;
+
+    private void Awake()
+    {
+        KOTimeHud.gameObject.SetActive(false);
+    }
 
     private void Update()
     {
@@ -38,6 +48,10 @@ public class PhaseManager : MonoBehaviour
             {
                 case GameState.Movement:
                     HandleRuneCursor();
+                    break;
+                case GameState.Exhaustion:
+                    RuneCursorInstance.gameObject.SetActive(false);
+                    HandleKOTime();
                     break;
                 default:
                     RuneCursorInstance.gameObject.SetActive(false);
@@ -76,10 +90,34 @@ public class PhaseManager : MonoBehaviour
         }
     }
 
+    void HandleKOTime()
+    {
+        KOTimeHud.gameObject.SetActive(true);
+        CurKOTime += Time.deltaTime;
+        WaitCircle.fillAmount = 1f - (CurKOTime / KOTime);
+
+        if (CurKOTime > KOTime)
+        {
+            StartSafePhase();
+        }
+    }
+
     void StartExplosionPhase()
     {
         CurrentGameState = GameState.Explosion;
         StartCoroutine(ExplosionCameraApproach());
+    }
+
+    void StartExhaustionPhase()
+    {
+        CurrentGameState = GameState.Exhaustion;
+        PlayerMobInstance.ExhaustionState();
+    }
+
+    void StartSafePhase()
+    {
+        CurrentGameState = GameState.Safe;
+        WaitCircle.fillAmount = 0f;
     }
 
     void UpdateHUD()
@@ -146,8 +184,7 @@ public class PhaseManager : MonoBehaviour
         Camera.main.transform.position = targetPosition;
         Camera.main.transform.rotation = Quaternion.Euler(StandardCameraDownTilt, 0, 0);
 
-        CurrentGameState = GameState.Exhaustion;
-        PlayerMobInstance.ExhaustionState();
+        StartExhaustionPhase();
     }
 
     public void PlayerIsDefeated()

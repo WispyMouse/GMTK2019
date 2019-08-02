@@ -17,6 +17,7 @@ public class PlayerMob : MonoBehaviour
     public SpriteRenderer PlayerSpriteRenderer;
     public Sprite PlayerWizardDefeatedSprite;
     public Sprite PlayerWizardExhaustedSprite;
+    public Sprite PlayerWizardExhaustedDefeatedSprite;
 
     private void Awake()
     {
@@ -124,7 +125,7 @@ public class PlayerMob : MonoBehaviour
         else if(PhaseManager.CurrentGameState == GameState.Exhaustion)
         {
             PlayerHealth = 0;
-            PlayerSpriteRenderer.sprite = PlayerWizardDefeatedSprite;
+            PlayerSpriteRenderer.sprite = PlayerWizardExhaustedDefeatedSprite;
             PhaseManagerInstance.PlayerIsDefeated();
         }
     }

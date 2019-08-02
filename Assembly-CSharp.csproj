@@ -69,7 +69,6 @@
     <Compile Include="Assets\Mobs\PlayerMob.cs" />
     <Compile Include="Assets\PhaseManager.cs" />
     <Compile Include="Assets\RuneCursor.cs" />
-    <Compile Include="Assets\SolutionMaker.cs" />
     <Compile Include="Assets\Terrain\TerrainGenerator.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/frost/Desktop/SourceControlled/GMTK2019/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
