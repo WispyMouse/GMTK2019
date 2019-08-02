@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public enum GameState { Movement, Explosion, Defeated, Exhaustion, Safe }
@@ -14,7 +15,7 @@ public class PhaseManager : MonoBehaviour
     public LayerMask EnemyMask;
 
     public Image WaitCircle;
-    public Transform KOTimeHud;
+    public Transform ExhaustionTimeHud;
 
     Vector3 CameraOffsetFromPlayer { get; } = Vector3.up * 10f + Vector3.back * 2.5f;
     Vector3 CameraOffsetFromExplosionCursor { get; } = Vector3.up * 2f + Vector3.back * 10f;
@@ -24,14 +25,21 @@ public class PhaseManager : MonoBehaviour
     float TimeForReturnToPlayerCameraApproach { get; } = .5f;
 
     float ExplosionScale { get; set; } = 4f;
-    float CurKOTime { get; set; } = 0;
-    float KOTime { get; } = 4f;
+    float CurExhaustionTime { get; set; } = 0;
+    float ExhaustionTime { get; } = 4f;
 
     public Slider HealthSlider;
 
+    public Transform PostRoundHud;
+    public Text FlavorLabel;
+    public Text StatisticsLabel;
+
+    int ExplosionHits { get; set; } = 0;
+
     private void Awake()
     {
-        KOTimeHud.gameObject.SetActive(false);
+        ExhaustionTimeHud.gameObject.SetActive(false);
+        PostRoundHud.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -92,11 +100,11 @@ public class PhaseManager : MonoBehaviour
 
     void HandleKOTime()
     {
-        KOTimeHud.gameObject.SetActive(true);
-        CurKOTime += Time.deltaTime;
-        WaitCircle.fillAmount = 1f - (CurKOTime / KOTime);
+        ExhaustionTimeHud.gameObject.SetActive(true);
+        CurExhaustionTime += Time.deltaTime;
+        WaitCircle.fillAmount = 1f - (CurExhaustionTime / ExhaustionTime);
 
-        if (CurKOTime > KOTime)
+        if (CurExhaustionTime > ExhaustionTime)
         {
             StartSafePhase();
         }
@@ -114,10 +122,41 @@ public class PhaseManager : MonoBehaviour
         PlayerMobInstance.ExhaustionState();
     }
 
+    void StartDefeatedPhase()
+    {
+        CurrentGameState = GameState.Defeated;
+        ExhaustionTimeHud.gameObject.SetActive(false);
+
+        FlavorLabel.text = "You Got Bop'd";
+
+        if (ExplosionHits > 0)
+        {
+            StatisticsLabel.text = $"(the {ExplosionHits} exploded things will respawn tomorrow)";
+        }
+        else
+        {
+            StatisticsLabel.text = $"";
+        }
+        
+        PostRoundHud.gameObject.SetActive(true);
+    }
+
     void StartSafePhase()
     {
         CurrentGameState = GameState.Safe;
         WaitCircle.fillAmount = 0f;
+        FlavorLabel.text = "Another Explosion,\nAnother Good Day.";
+
+        if (ExplosionHits > 0)
+        {
+            StatisticsLabel.text = $"You got {ExplosionHits} of them that time!";
+        }
+        else
+        {
+            StatisticsLabel.text = $"";
+        }
+
+        PostRoundHud.gameObject.SetActive(true);
     }
 
     void UpdateHUD()
@@ -154,6 +193,7 @@ public class PhaseManager : MonoBehaviour
         yield return new WaitForSeconds(.6f);
 
         Collider[] enemyHits = Physics.OverlapSphere(RuneCursorInstance.transform.position, ExplosionScale, EnemyMask, QueryTriggerInteraction.Collide);
+        ExplosionHits = enemyHits.Length;
 
         for (int ii = 0; ii < enemyHits.Length; ii++)
         {
@@ -189,6 +229,12 @@ public class PhaseManager : MonoBehaviour
 
     public void PlayerIsDefeated()
     {
-        CurrentGameState = GameState.Defeated;
+        StartDefeatedPhase();
+    }
+
+    public void NextDayButton()
+    {
+        CurrentGameState = GameState.Movement;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
