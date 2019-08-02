@@ -16,6 +16,9 @@ public class EnemyCrab : MonoBehaviour
 
     FacesCamera FacesCameraComponent { get; set; }
 
+    public bool EnemyActive { get; private set; } = true;
+    public SpriteRenderer EnemySprite;
+
     private void Awake()
     {
         FacesCameraComponent = GetComponentInChildren<FacesCamera>();
@@ -46,6 +49,7 @@ public class EnemyCrab : MonoBehaviour
     public IEnumerator DefeatAnimationStartup(Vector3 explosionEpicenter)
     {
         FacesCameraComponent.enabled = false;
+        EnemyActive = false;
         StartCoroutine(DefeatAnimation(explosionEpicenter));
         yield return new WaitForSeconds(timeForRotationStartup);
     }
@@ -64,10 +68,50 @@ public class EnemyCrab : MonoBehaviour
             transform.rotation = Quaternion.Euler(Camera.main.transform.eulerAngles.x, 0, Mathf.Lerp(0, defeatAnimationRotationForce * rotationDirection, currentTimeTick));
             transform.position = new Vector3(startingPosition.x + Mathf.Lerp(0, defeatAnimationKnockback * rotationDirection, currentTimeTick), 
                 Mathf.PingPong((currentTimeTick) * 2f * defeatAnimationBounceHeight, defeatAnimationBounceHeight), startingPosition.z);
+            EnemySprite.color = new Color(1f, 1f, 1f, 1f - currentTimeTick);
             currentAnimationTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
 
         gameObject.SetActive(false);
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        PlayerMob playerMob = other.GetComponent<PlayerMob>();
+
+        if (playerMob == null)
+        {
+            return;
+        }
+
+        HurtPlayer(playerMob);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        PlayerMob playerMob = other.GetComponent<PlayerMob>();
+
+        if (playerMob == null)
+        {
+            return;
+        }
+
+        HurtPlayer(playerMob);
+    }
+
+    void HurtPlayer(PlayerMob playerMobInstance)
+    {
+        if (!EnemyActive)
+        {
+            return;
+        }
+
+        if (playerMobInstance.InHurtTime)
+        {
+            return;
+        }
+
+        playerMobInstance.TakeDamage(20f);
     }
 }

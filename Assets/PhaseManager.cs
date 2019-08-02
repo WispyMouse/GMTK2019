@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum GameState { Movement, Explosion }
 public class PhaseManager : MonoBehaviour
@@ -12,15 +13,21 @@ public class PhaseManager : MonoBehaviour
     public LayerMask FloorMask;
     public LayerMask EnemyMask;
 
-    Vector3 CameraOffsetFromPlayer { get; } = Vector3.up * 15f + Vector3.back * 5f;
-    Vector3 CameraOffsetFromExplosionCursor { get; } = Vector3.up * 4f + Vector3.back * 20f;
+    Vector3 CameraOffsetFromPlayer { get; } = Vector3.up * 10f + Vector3.back * 2.5f;
+    Vector3 CameraOffsetFromExplosionCursor { get; } = Vector3.up * 2f + Vector3.back * 10f;
     float TimeForExplosionCursorCameraApproach { get; } = 1.4f;
     float StandardCameraDownTilt { get; } = 70f;
     float ExplosionCameraDowntilt { get; } = 5f;
     float TimeForReturnToPlayerCameraApproach { get; } = .8f;
 
+    float ExplosionScale { get; set; } = 4f;
+
+    public Slider HealthSlider;
+
     private void Update()
     {
+        UpdateHUD();
+
         if (Input.GetMouseButtonDown(1) && CurrentGameState == GameState.Movement && RuneCursorInstance.activeSelf)
         {
             StartExplosionPhase();
@@ -60,6 +67,7 @@ public class PhaseManager : MonoBehaviour
         {
             RuneCursorInstance.SetActive(true);
             RuneCursorInstance.transform.position = floorHit.point + Vector3.up * .1f;
+            RuneCursorInstance.transform.localScale = Vector3.one * ExplosionScale;
         }
     }
 
@@ -67,6 +75,12 @@ public class PhaseManager : MonoBehaviour
     {
         CurrentGameState = GameState.Explosion;
         StartCoroutine(ExplosionCameraApproach());
+    }
+
+    void UpdateHUD()
+    {
+        HealthSlider.maxValue = PlayerMobInstance.PlayerMaxHealth;
+        HealthSlider.value = PlayerMobInstance.PlayerHealth;
     }
 
     IEnumerator ExplosionCameraApproach()
@@ -92,10 +106,11 @@ public class PhaseManager : MonoBehaviour
     IEnumerator ShowExplosion()
     {
         ExplosionInstance.transform.position = RuneCursorInstance.transform.position;
+        ExplosionInstance.transform.localScale = Vector3.one * ExplosionScale;
         ExplosionInstance.gameObject.SetActive(true);
         yield return new WaitForSeconds(.6f);
 
-        Collider[] enemyHits = Physics.OverlapSphere(RuneCursorInstance.transform.position, 3f, EnemyMask, QueryTriggerInteraction.Collide);
+        Collider[] enemyHits = Physics.OverlapSphere(RuneCursorInstance.transform.position, ExplosionScale, EnemyMask, QueryTriggerInteraction.Collide);
 
         for (int ii = 0; ii < enemyHits.Length; ii++)
         {
