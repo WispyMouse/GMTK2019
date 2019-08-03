@@ -120,6 +120,6 @@ public class EnemyCrab : Mob
             return;
         }
 
-        playerMobInstance.TakeDamage(20f);
+        playerMobInstance.TakeDamage(1);
     }
 }

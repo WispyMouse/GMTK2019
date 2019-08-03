@@ -12,17 +12,11 @@ public class PlayerMob : Mob
     float HurtBlinkInterval { get; } = .2f;
     float CurHurtTime { get; set; } = 0;
 
-    public float PlayerMaxHealth { get; } = 100f;
-    public float PlayerHealth { get; private set; }
+    public int PlayerHealth { get; private set; } = 3;
     public SpriteRenderer PlayerSpriteRenderer;
     public Sprite PlayerWizardDefeatedSprite;
     public Sprite PlayerWizardExhaustedSprite;
     public Sprite PlayerWizardExhaustedDefeatedSprite;
-
-    private void Awake()
-    {
-        PlayerHealth = PlayerMaxHealth;
-    }
 
     void Update()
     {
@@ -109,7 +103,7 @@ public class PlayerMob : Mob
         }
     }
 
-    public void TakeDamage(float amount)
+    public void TakeDamage(int amount)
     {
         if (PhaseManager.CurrentGameState == GameState.Movement)
         {

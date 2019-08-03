@@ -15,6 +15,7 @@ public class PhaseManager : MonoBehaviour
     public LayerMask FloorMask;
     public LayerMask EnemyMask;
     public LevelManager LevelManagerInstance;
+    public HealthManager HealthManagerInstance;
 
     public Image WaitCircle;
     public Transform ExhaustionTimeHud;
@@ -26,11 +27,9 @@ public class PhaseManager : MonoBehaviour
     float ExplosionCameraDowntilt { get; } = 10f;
     float TimeForReturnToPlayerCameraApproach { get; } = .5f;
 
-    float ExplosionScale { get; set; } = 4f;
+    float ExplosionScale { get; set; } = 5f;
     float CurExhaustionTime { get; set; } = 0;
     float ExhaustionTime { get; } = 4f;
-
-    public Slider HealthSlider;
 
     public Transform PostRoundHud;
     public Text FlavorLabel;
@@ -204,8 +203,7 @@ public class PhaseManager : MonoBehaviour
 
     void UpdateHUD()
     {
-        HealthSlider.maxValue = PlayerMobInstance.PlayerMaxHealth;
-        HealthSlider.value = PlayerMobInstance.PlayerHealth;
+        HealthManagerInstance.SetHealth(PlayerMobInstance.PlayerHealth);
     }
 
     IEnumerator ExplosionCameraApproach()
@@ -235,7 +233,7 @@ public class PhaseManager : MonoBehaviour
         ExplosionInstance.gameObject.SetActive(true);
         yield return new WaitForSeconds(.6f);
 
-        Collider[] enemyHits = Physics.OverlapSphere(RuneCursorInstance.transform.position, ExplosionScale, EnemyMask, QueryTriggerInteraction.Collide);
+        Collider[] enemyHits = Physics.OverlapSphere(RuneCursorInstance.transform.position, ExplosionScale * .5f, EnemyMask, QueryTriggerInteraction.Collide);
         ExplosionHits = enemyHits.Length;
 
         for (int ii = 0; ii < enemyHits.Length; ii++)
