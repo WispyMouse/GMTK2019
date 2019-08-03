@@ -49,6 +49,7 @@ MonoBehaviour:
   WallMask:
     serializedVersion: 2
     m_Bits: 512
+  MobSprite: {fileID: 2556889405083671629}
   MovementSpeed: 4.5
   EnemySprite: {fileID: 2556889405083671629}
   CrabNeutral: {fileID: 7946901282031728073, guid: 8ae7355c43fd9af4a95599beb3517de2,
@@ -58,8 +59,9 @@ MonoBehaviour:
     type: 3}
   CrabAttack: {fileID: 1888593728279638935, guid: 8ae7355c43fd9af4a95599beb3517de2,
     type: 3}
-  ChargeTime: 0.2
-  RestTime: 0.5
+  ChargeTime: 0.25
+  AttackTime: 0.55
+  RestTime: 0.7
 --- !u!65 &1828307635
 BoxCollider:
   m_ObjectHideFlags: 0

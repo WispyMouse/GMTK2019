@@ -26,7 +26,7 @@ public class EnemyCrab : Mob
     public Sprite CrabAttack;
 
     public float ChargeTime;
-    float AttackTime { get; } = .4f;
+    public float AttackTime;
     public float RestTime;
     float CurPhaseTime { get; set; } = 0f;
     AttackPattern AttackStage { get; set; } = AttackPattern.Rest;
@@ -78,7 +78,10 @@ public class EnemyCrab : Mob
                 CurPhaseTime = 0;
                 AttackStage = AttackPattern.Attack;
                 EnemySprite.sprite = CrabAttack;
-                AttackTarget = PlayerMobInstance.transform.position;
+
+                Vector3 actualTarget = Vector3.MoveTowards(transform.position, PlayerMobInstance.transform.position, MovementSpeed * AttackTime);
+                float adjustedMagnitudeModifier = Mathf.Min(1.5f, Vector3.Distance(transform.position, actualTarget) * .3f);
+                AttackTarget = actualTarget + new Vector3(Random.Range(-adjustedMagnitudeModifier, adjustedMagnitudeModifier), 0, Random.Range(-adjustedMagnitudeModifier, adjustedMagnitudeModifier));
             }
         }
         else if(AttackStage == AttackPattern.Attack)

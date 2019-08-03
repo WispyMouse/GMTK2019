@@ -29,7 +29,7 @@ public class PhaseManager : MonoBehaviour
 
     float ExplosionScale { get; set; } = 5f;
     float CurExhaustionTime { get; set; } = 0;
-    float ExhaustionTime { get; } = 4f;
+    float ExhaustionTime { get; } = 4.5f;
 
     public Transform PostRoundHud;
     public Text FlavorLabel;

@@ -7,6 +7,7 @@ public class Mob : MonoBehaviour
     // Unity doesn't like it when you're *too* close to things
     float PlanckDistance = .001f;
     public LayerMask WallMask;
+    public SpriteRenderer MobSprite;
 
     protected void Walk(Vector3 toWalk)
     {
@@ -39,5 +40,17 @@ public class Mob : MonoBehaviour
         }
 
         transform.position = transform.position + workingMovementDelta;
+
+        if (toWalk.x != 0)
+        {
+            if (toWalk.x > 0)
+            {
+                MobSprite.flipX = false;
+            }
+            else
+            {
+                MobSprite.flipX = true;
+            }
+        }
     }
 }

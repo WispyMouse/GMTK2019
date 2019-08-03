@@ -2133,6 +2133,7 @@ MonoBehaviour:
   WallMask:
     serializedVersion: 2
     m_Bits: 512
+  MobSprite: {fileID: 1139629133}
   PhaseManagerInstance: {fileID: 1888352801}
   PlayerSpriteRenderer: {fileID: 1139629133}
   PlayerWizardDefeatedSprite: {fileID: 21300000, guid: 92a996a445d905d4b9d77ccfa6208d06,
