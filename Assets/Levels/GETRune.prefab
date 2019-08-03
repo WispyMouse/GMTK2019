@@ -45,6 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RuneSpriteRenderer: {fileID: 3856677970908758223}
+  ColorOne: {r: 1, g: 1, b: 1, a: 1}
+  ColorTwo: {r: 0.1745283, g: 0.66731405, b: 0.6981132, a: 0.78431374}
 --- !u!1 &3856677970908758221
 GameObject:
   m_ObjectHideFlags: 0
