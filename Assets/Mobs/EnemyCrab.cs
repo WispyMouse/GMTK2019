@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum AttackPattern { Rest, Charge, Attack }
 public class EnemyCrab : Mob
 {
     public PlayerMob PlayerMobInstance { get; set; }
-    const float MovementSpeed = 3.5f;
+    const float MovementSpeed = 4.5f;
 
     float defeatAnimationRotationForce { get; set; }
     float defeatAnimationBounceHeight { get; set; }
@@ -19,6 +20,18 @@ public class EnemyCrab : Mob
     public bool EnemyActive { get; private set; } = true;
     public SpriteRenderer EnemySprite;
 
+    public Sprite CrabNeutral;
+    public Sprite CrabKO;
+    public Sprite CrabChargeUp;
+    public Sprite CrabAttack;
+
+    float ChargeTime { get; } = .15f;
+    float AttackTime { get; } = .4f;
+    float RestTime { get; } = .5f;
+    float CurPhaseTime { get; set; } = 0f;
+    AttackPattern AttackStage { get; set; } = AttackPattern.Rest;
+    Vector3 AttackTarget { get; set; }
+
     private void Awake()
     {
         FacesCameraComponent = GetComponentInChildren<FacesCamera>();
@@ -29,6 +42,8 @@ public class EnemyCrab : Mob
         defeatAnimationBounceHeight = Random.Range(1f, 2.5f);
         defeatAnimationKnockback = Random.Range(1f, 2f);
         timeForDefeatAnimation = Random.Range(.7f, .9f);
+
+        EnemySprite.sprite = CrabNeutral;
     }
 
     private void Update()
@@ -45,12 +60,44 @@ public class EnemyCrab : Mob
 
     void HandleMovement()
     {
-        Vector3 targetPosition = Vector3.MoveTowards(transform.position, PlayerMobInstance.transform.position, Time.deltaTime * MovementSpeed);
-        Walk(targetPosition - transform.position);
+        CurPhaseTime += Time.deltaTime;
+
+        if (AttackStage == AttackPattern.Rest)
+        {
+            if (CurPhaseTime > RestTime)
+            {
+                CurPhaseTime = 0;
+                AttackStage = AttackPattern.Charge;
+                EnemySprite.sprite = CrabChargeUp;
+            }
+        }
+        else if(AttackStage == AttackPattern.Charge)
+        {
+            if (CurPhaseTime > ChargeTime)
+            {
+                CurPhaseTime = 0;
+                AttackStage = AttackPattern.Attack;
+                EnemySprite.sprite = CrabAttack;
+                AttackTarget = PlayerMobInstance.transform.position;
+            }
+        }
+        else if(AttackStage == AttackPattern.Attack)
+        {
+            Vector3 newTargetPosition = Vector3.MoveTowards(transform.position, AttackTarget, Time.deltaTime * MovementSpeed);
+            Walk(newTargetPosition - transform.position);
+
+            if (CurPhaseTime > AttackTime)
+            {
+                CurPhaseTime = 0;
+                AttackStage = AttackPattern.Rest;
+                EnemySprite.sprite = CrabNeutral;
+            }
+        }
     }
 
     public IEnumerator DefeatAnimationStartup(Vector3 explosionEpicenter)
     {
+        EnemySprite.sprite = CrabKO;
         FacesCameraComponent.enabled = false;
         EnemyActive = false;
         StartCoroutine(DefeatAnimation(explosionEpicenter));

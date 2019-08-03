@@ -50,6 +50,13 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   EnemySprite: {fileID: 2556889405083671629}
+  CrabNeutral: {fileID: 7946901282031728073, guid: 8ae7355c43fd9af4a95599beb3517de2,
+    type: 3}
+  CrabKO: {fileID: 3336221523516516871, guid: 8ae7355c43fd9af4a95599beb3517de2, type: 3}
+  CrabChargeUp: {fileID: 2298374433165398522, guid: 8ae7355c43fd9af4a95599beb3517de2,
+    type: 3}
+  CrabAttack: {fileID: 1888593728279638935, guid: 8ae7355c43fd9af4a95599beb3517de2,
+    type: 3}
 --- !u!65 &1828307635
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -148,7 +155,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8ae7355c43fd9af4a95599beb3517de2, type: 3}
+  m_Sprite: {fileID: 7946901282031728073, guid: 8ae7355c43fd9af4a95599beb3517de2,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
