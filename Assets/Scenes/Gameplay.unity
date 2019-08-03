@@ -1974,6 +1974,8 @@ MonoBehaviour:
     type: 3}
   GiantEnemyCrabPF: {fileID: 2393178834768252948, guid: 9576412413ea4754c8b133a175a39240,
     type: 3}
+  EnemyFrogPF: {fileID: 7615836441321501883, guid: ff5e3b0738042e04c9066801dedca525,
+    type: 3}
   WASDRunePF: {fileID: 2706443299342803755, guid: 1248c0fb4676a43429f483e54afc0515,
     type: 3}
   RightClickRunePF: {fileID: 5346137709183189394, guid: e1e262147ac6e174ea600e5e8ec50642,
