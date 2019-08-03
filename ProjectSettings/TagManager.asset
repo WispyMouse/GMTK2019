@@ -38,6 +38,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Rune
+    uniqueID: 2525356605
+    locked: 0
   - name: Cursor
     uniqueID: 1935657285
     locked: 0
