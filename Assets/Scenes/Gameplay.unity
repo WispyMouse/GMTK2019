@@ -2662,6 +2662,28 @@ MonoBehaviour:
   NextLevelButton: {fileID: 108119021}
   AlwaysReturnToLevelSelect: {fileID: 821531232}
   LevelNameLabel: {fileID: 113089136}
+  VictoryWords:
+  - Another Explosion,\nAnother Good Day
+  - Got 'Em Coach
+  - Told You We Could Do It
+  - Kaplowey! Foosh!\nKaboom!
+  - The Floor Is Comfier\nWhen You Explode It!
+  - Ahahahaha!\nGot 'Em
+  - Biggest One Yet!
+  - That Monster Owed Me\nLike, 20 Goldbucks
+  - That's All, Folks!\n<i>(I'm out of mana...)</i>
+  - The Greatest Magic!\n<i>(Also, exhausting)</i>
+  DefeatWords:
+  - Got Bop'd
+  - Oooph...
+  - That Didn't Go As Planned...
+  - We'll Get 'Em\nNext Time!
+  - We've Been Ouch'd Before\n<i>(Still, Ouch!)</i>
+  - We'll Get Our Revenge!
+  - No, Wait,\nNot Like That
+  - Imagine If We Had Two Explosions!\n<i>(Wouldn't fit the game jam...)</i>
+  - Oh Yeah, Well\nWe're Still Cooler!
+  - '>> blep <<'
 --- !u!4 &1888352802
 Transform:
   m_ObjectHideFlags: 0

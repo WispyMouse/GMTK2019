@@ -41,6 +41,9 @@ public class PhaseManager : MonoBehaviour
     int ExplosionHits { get; set; } = 0;
     bool PlayerHasStaff { get; set; } = false;
 
+    public List<string> VictoryWords;
+    public List<string> DefeatWords;
+
     private void Awake()
     {
         CurrentGameState = GameState.Movement;
@@ -157,7 +160,7 @@ public class PhaseManager : MonoBehaviour
         ExhaustionTimeHud.gameObject.SetActive(false);
         AlwaysReturnToLevelSelect.gameObject.SetActive(false);
 
-        FlavorLabel.text = "You Got Bop'd";
+        FlavorLabel.text = DefeatWords[Random.Range(0, DefeatWords.Count)].Replace("\\n", "\n");
 
         if (ExplosionHits > 0)
         {
@@ -176,7 +179,7 @@ public class PhaseManager : MonoBehaviour
     {
         CurrentGameState = GameState.Safe;
         WaitCircle.fillAmount = 0f;
-        FlavorLabel.text = "Another Explosion,\nAnother Good Day.";
+        FlavorLabel.text = VictoryWords[Random.Range(0, DefeatWords.Count)].Replace("\\n", "\n");
         AlwaysReturnToLevelSelect.gameObject.SetActive(false);
 
         if (ExplosionHits > 0)
