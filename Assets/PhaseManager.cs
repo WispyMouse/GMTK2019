@@ -38,6 +38,7 @@ public class PhaseManager : MonoBehaviour
     public Button AlwaysReturnToLevelSelect;
 
     int ExplosionHits { get; set; } = 0;
+    bool PlayerHasStaff { get; set; } = false;
 
     private void Awake()
     {
@@ -48,14 +49,12 @@ public class PhaseManager : MonoBehaviour
 
     private void Start()
     {
-        GameLevel toLoad = MainMenuControl.SelectedLevel;
-
-        if (toLoad == null)
+        if (MainMenuControl.SelectedLevel == null)
         {
-            toLoad = LevelManagerInstance.GetLevel(0);
+            MainMenuControl.SelectedLevel = LevelManagerInstance.GetLevel(0);
         }
         
-        MapGeneratorInstance.GenerateMap(toLoad);
+        MapGeneratorInstance.GenerateMap(MainMenuControl.SelectedLevel);
     }
 
     private void Update()
@@ -104,6 +103,12 @@ public class PhaseManager : MonoBehaviour
 
     void HandleRuneCursor()
     {
+        if (!PlayerHasStaff)
+        {
+            RuneCursorInstance.gameObject.SetActive(false);
+            return;
+        }
+
         Ray cursorRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit floorHit;
 
@@ -182,18 +187,11 @@ public class PhaseManager : MonoBehaviour
 
         PostRoundHud.gameObject.SetActive(true);
 
-        if (MainMenuControl.SelectedLevel != null)
-        {
-            LevelManagerInstance.ClearLevel(MainMenuControl.SelectedLevel, ExplosionHits);
+        LevelManagerInstance.ClearLevel(MainMenuControl.SelectedLevel, ExplosionHits);
 
-            if (LevelManagerInstance.GameLevelCount > MainMenuControl.SelectedLevel.LevelIndex + 1)
-            {
-                NextLevelButton.gameObject.SetActive(true);
-            }
-            else
-            {
-                NextLevelButton.gameObject.SetActive(false);
-            }
+        if (LevelManagerInstance.GameLevelCount > MainMenuControl.SelectedLevel.LevelIndex + 1)
+        {
+            NextLevelButton.gameObject.SetActive(true);
         }
         else
         {
@@ -296,5 +294,10 @@ public class PhaseManager : MonoBehaviour
     {
         MainMenuControl.ShowLevelSelect = true;
         SceneManager.LoadScene(0);
+    }
+
+    public void PlayerPicksUpStaff()
+    {
+        PlayerHasStaff = true;
     }
 }

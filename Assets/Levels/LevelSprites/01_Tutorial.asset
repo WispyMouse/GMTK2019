@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b24e182b241f2f4f899ff0f172bd6d8, type: 3}
-  m_Name: SecondLevel
+  m_Name: 01_Tutorial
   m_EditorClassIdentifier: 
-  LevelName: Second Level
-  LevelMap: {fileID: 21300000, guid: c4561b87d783ea248bf7a47998dc306e, type: 3}
+  LevelName: Tutorial Level
+  LevelMap: {fileID: 21300000, guid: 767b01c4adb24f740b1bb237d3f661e8, type: 3}

@@ -8,8 +8,8 @@ public class PlayerMob : Mob
     const float ExhaustionMovementSpeed = .25f;
 
     public PhaseManager PhaseManagerInstance;
-    float HurtAnimationTime { get; } = .6f;
-    float HurtBlinkInterval { get; } = .2f;
+    float HurtAnimationTime { get; } = .9f;
+    float HurtBlinkInterval { get; } = .3f;
     float CurHurtTime { get; set; } = 0;
 
     public int PlayerHealth { get; private set; } = 3;
@@ -17,6 +17,8 @@ public class PlayerMob : Mob
     public Sprite PlayerWizardDefeatedSprite;
     public Sprite PlayerWizardExhaustedSprite;
     public Sprite PlayerWizardExhaustedDefeatedSprite;
+    public Sprite PlayerWizardWithStaffSprite;
+    public LayerMask ExplosionStaffMask;
 
     void Update()
     {
@@ -127,5 +129,23 @@ public class PlayerMob : Mob
     public void ExhaustionState()
     {
         PlayerSpriteRenderer.sprite = PlayerWizardExhaustedSprite;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (PhaseManager.CurrentGameState != GameState.Movement)
+        {
+            return;
+        }
+
+        if (ExplosionStaffMask != (ExplosionStaffMask | (1 << other.gameObject.layer)))
+        {
+            return;
+        }
+
+        PlayerSpriteRenderer.sprite = PlayerWizardWithStaffSprite;
+        Destroy(other.gameObject);
+
+        PhaseManagerInstance.PlayerPicksUpStaff();
     }
 }

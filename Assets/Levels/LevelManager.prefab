@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameLevels:
-  - {fileID: 11400000, guid: 33bf45cac00d2a742b22391789249129, type: 2}
   - {fileID: 11400000, guid: 5beb9f9ca865d3043aa58f57cea22450, type: 2}
+  - {fileID: 11400000, guid: 33bf45cac00d2a742b22391789249129, type: 2}

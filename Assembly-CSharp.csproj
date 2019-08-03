@@ -66,16 +66,15 @@
     <Compile Include="Assets\Levels\GameLevel.cs" />
     <Compile Include="Assets\Levels\LevelButton.cs" />
     <Compile Include="Assets\Levels\LevelManager.cs" />
+    <Compile Include="Assets\Levels\Rune.cs" />
     <Compile Include="Assets\MainMenuControl.cs" />
     <Compile Include="Assets\MapGenerator.cs" />
     <Compile Include="Assets\Mobs\EnemyCrab.cs" />
     <Compile Include="Assets\Mobs\FacesCamera.cs" />
     <Compile Include="Assets\Mobs\Mob.cs" />
-    <Compile Include="Assets\Mobs\MobGenerator.cs" />
     <Compile Include="Assets\Mobs\PlayerMob.cs" />
     <Compile Include="Assets\PhaseManager.cs" />
     <Compile Include="Assets\RuneCursor.cs" />
-    <Compile Include="Assets\Terrain\TerrainGenerator.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/frost/Desktop/SourceControlled/GMTK2019/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

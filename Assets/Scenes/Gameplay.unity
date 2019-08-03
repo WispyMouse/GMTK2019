@@ -1825,8 +1825,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1189127625}
   - component: {fileID: 1189127624}
-  - component: {fileID: 1189127626}
-  - component: {fileID: 1189127627}
   m_Layer: 0
   m_Name: Generators
   m_TagString: Untagged
@@ -1846,9 +1844,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378e4b9e664dac140a601945cc504812, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TerrainGeneratorInstance: {fileID: 1189127626}
-  MobGeneratorInstance: {fileID: 1189127627}
   PlayerMobInstance: {fileID: 1474509867}
+  FloorPF: {fileID: 1401774202473428109, guid: 1efe8831eb8d85c41a3fd4dd4075fe6b, type: 3}
+  WallPF: {fileID: 4940773231731377855, guid: e3569672ff6b2c547b7534ef544a3283, type: 3}
+  ExplosionStaffPF: {fileID: 4431659747793017278, guid: 88ac76e5b6c43604bb912ea024dc4eee,
+    type: 3}
+  EnemyCrabPF: {fileID: 2556889403962733159, guid: 416d5526c56b02d4c8462edf2f46861f,
+    type: 3}
+  WASDRunePF: {fileID: 2706443299342803755, guid: 1248c0fb4676a43429f483e54afc0515,
+    type: 3}
+  RightClickRunePF: {fileID: 5346137709183189394, guid: e1e262147ac6e174ea600e5e8ec50642,
+    type: 3}
+  GetRunePF: {fileID: 3856677969772408684, guid: fff0304fb4c890040ad8a6f595cf97b5,
+    type: 3}
+  ExplosionRunePF: {fileID: 6215812366106922467, guid: f75f6a7ec9948d542a7f7a702ee11b5f,
+    type: 3}
 --- !u!4 &1189127625
 Transform:
   m_ObjectHideFlags: 0
@@ -1863,35 +1873,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1189127626
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1189127623}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 310e71f3896383b47a782786fc0d7969, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FloorPF: {fileID: 1401774202473428109, guid: 1efe8831eb8d85c41a3fd4dd4075fe6b, type: 3}
-  WallPF: {fileID: 4940773231731377855, guid: e3569672ff6b2c547b7534ef544a3283, type: 3}
---- !u!114 &1189127627
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1189127623}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 851c73ca672f496489495e353b514e73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerMobInstance: {fileID: 1474509867}
-  EnemyCrabPF: {fileID: 2556889403962733159, guid: 416d5526c56b02d4c8462edf2f46861f,
-    type: 3}
 --- !u!114 &1256099482 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2696367054666912149, guid: c5d4437eaf9ccfc42904a77fcd0c7815,
@@ -2037,6 +2018,11 @@ MonoBehaviour:
     type: 3}
   PlayerWizardExhaustedDefeatedSprite: {fileID: 21300000, guid: a6b24c6c315c03b46b0d7a37616c8d5b,
     type: 3}
+  PlayerWizardWithStaffSprite: {fileID: 21300000, guid: aac941579cc471442b2e4971640a5412,
+    type: 3}
+  ExplosionStaffMask:
+    serializedVersion: 2
+    m_Bits: 4096
 --- !u!54 &1474509868
 Rigidbody:
   m_ObjectHideFlags: 0
