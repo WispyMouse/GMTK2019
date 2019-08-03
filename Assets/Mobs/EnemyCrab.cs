@@ -6,7 +6,7 @@ public enum AttackPattern { Rest, Charge, Attack }
 public class EnemyCrab : Mob
 {
     public PlayerMob PlayerMobInstance { get; set; }
-    const float MovementSpeed = 4.5f;
+    public float MovementSpeed;
 
     float defeatAnimationRotationForce { get; set; }
     float defeatAnimationBounceHeight { get; set; }
@@ -25,9 +25,9 @@ public class EnemyCrab : Mob
     public Sprite CrabChargeUp;
     public Sprite CrabAttack;
 
-    float ChargeTime { get; } = .15f;
+    public float ChargeTime;
     float AttackTime { get; } = .4f;
-    float RestTime { get; } = .5f;
+    public float RestTime;
     float CurPhaseTime { get; set; } = 0f;
     AttackPattern AttackStage { get; set; } = AttackPattern.Rest;
     Vector3 AttackTarget { get; set; }

@@ -49,6 +49,7 @@ public class PhaseManager : MonoBehaviour
         CurrentGameState = GameState.Movement;
         ExhaustionTimeHud.gameObject.SetActive(false);
         PostRoundHud.gameObject.SetActive(false);
+        RuneCursorInstance.gameObject.SetActive(false);
     }
 
     private void Start()
@@ -285,13 +286,11 @@ public class PhaseManager : MonoBehaviour
 
     public void RetryButton()
     {
-        CurrentGameState = GameState.Movement;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void ToNextLevelButton()
     {
-        CurrentGameState = GameState.Movement;
         MainMenuControl.SelectedLevel = LevelManagerInstance.GetLevel(MainMenuControl.SelectedLevel.LevelIndex + 1);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
