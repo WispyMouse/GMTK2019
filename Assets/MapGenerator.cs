@@ -8,6 +8,7 @@ public class MapGenerator : MonoBehaviour
 
     public GameObject FloorPF;
     public GameObject WallPF;
+    public GameObject TallWallPF;
     public GameObject ExplosionStaffPF;
 
     public EnemyCrab EnemyCrabPF;
@@ -28,6 +29,7 @@ public class MapGenerator : MonoBehaviour
         spawnDictionary.Add(new Color(0, 74f / 255f, 127f / 255f, 1f), ExplosionRunePF);
         spawnDictionary.Add(new Color(72f / 255f, 0, 255f / 255f, 1f), ExplosionStaffPF);
         spawnDictionary.Add(new Color(0f, 0f, 0f, 1f), WallPF);
+        spawnDictionary.Add(new Color(127f / 255f, 63f / 255f, 91f / 255f, 1f), TallWallPF);
 
         for (int xx = 0; xx < toGenerate.LevelMap.texture.width; xx++)
         {

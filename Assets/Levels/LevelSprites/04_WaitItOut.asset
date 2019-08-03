@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b24e182b241f2f4f899ff0f172bd6d8, type: 3}
-  m_Name: 02_Simple
+  m_Name: 04_WaitItOut
   m_EditorClassIdentifier: 
-  LevelName: 'Circle Round
+  LevelName: 'Patience
 
-    <i>Get Your Staff!</i>'
-  LevelMap: {fileID: 21300000, guid: c4561b87d783ea248bf7a47998dc306e, type: 3}
+    <i>Don''t Get Caught Helpless!</i>'
+  LevelMap: {fileID: 21300000, guid: db76a135c2e78ca42b201d4d78c2f84f, type: 3}

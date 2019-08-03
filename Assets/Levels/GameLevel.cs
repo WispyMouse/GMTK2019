@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "level", menuName = "GMTK/Level")]
 public class GameLevel : ScriptableObject
 {
+    [TextArea]
     public string LevelName;
     public Sprite LevelMap;
     

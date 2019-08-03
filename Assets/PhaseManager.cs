@@ -20,12 +20,12 @@ public class PhaseManager : MonoBehaviour
     public Image WaitCircle;
     public Transform ExhaustionTimeHud;
 
-    Vector3 CameraOffsetFromPlayer { get; } = Vector3.up * 10f + Vector3.back * 2.5f;
+    Vector3 CameraOffsetFromPlayer { get; } = Vector3.up * 13f + Vector3.back * 4f;
     Vector3 CameraOffsetFromExplosionCursor { get; } = Vector3.up * 2.5f + Vector3.back * 5f;
-    float TimeForExplosionCursorCameraApproach { get; } = .7f;
-    float StandardCameraDownTilt { get; } = 70f;
+    float TimeForExplosionCursorCameraApproach { get; } = .8f;
+    float StandardCameraDownTilt { get; } = 75f;
     float ExplosionCameraDowntilt { get; } = 10f;
-    float TimeForReturnToPlayerCameraApproach { get; } = .5f;
+    float TimeForReturnToPlayerCameraApproach { get; } = .3f;
 
     float ExplosionScale { get; set; } = 5f;
     float CurExhaustionTime { get; set; } = 0;
@@ -36,6 +36,7 @@ public class PhaseManager : MonoBehaviour
     public Text StatisticsLabel;
     public Button NextLevelButton;
     public Button AlwaysReturnToLevelSelect;
+    public Text LevelNameLabel;
 
     int ExplosionHits { get; set; } = 0;
     bool PlayerHasStaff { get; set; } = false;
@@ -53,7 +54,9 @@ public class PhaseManager : MonoBehaviour
         {
             MainMenuControl.SelectedLevel = LevelManagerInstance.GetLevel(0);
         }
-        
+
+        LevelNameLabel.text = MainMenuControl.SelectedLevel.LevelName;
+
         MapGeneratorInstance.GenerateMap(MainMenuControl.SelectedLevel);
     }
 

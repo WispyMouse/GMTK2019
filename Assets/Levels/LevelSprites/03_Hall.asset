@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b24e182b241f2f4f899ff0f172bd6d8, type: 3}
-  m_Name: 02_Simple
+  m_Name: 03_Hall
   m_EditorClassIdentifier: 
-  LevelName: 'Circle Round
+  LevelName: 'Hallway
 
-    <i>Get Your Staff!</i>'
-  LevelMap: {fileID: 21300000, guid: c4561b87d783ea248bf7a47998dc306e, type: 3}
+    <i>Corridor of Crab</i>'
+  LevelMap: {fileID: 21300000, guid: 206de47bd4ee62c4c85b759f91fdab88, type: 3}
