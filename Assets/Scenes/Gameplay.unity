@@ -1471,6 +1471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378e4b9e664dac140a601945cc504812, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MapSprite: {fileID: 21300000, guid: c4561b87d783ea248bf7a47998dc306e, type: 3}
   TerrainGeneratorInstance: {fileID: 1189127626}
   MobGeneratorInstance: {fileID: 1189127627}
   PlayerMobInstance: {fileID: 1474509867}
@@ -1979,9 +1980,13 @@ MonoBehaviour:
   ExplosionInstance: {fileID: 1567950741}
   PlayerMobInstance: {fileID: 1474509867}
   RuneCursorInstance: {fileID: 1855992861}
+  MapGeneratorInstance: {fileID: 1189127624}
   FloorMask:
     serializedVersion: 2
     m_Bits: 256
+  WallMask:
+    serializedVersion: 2
+    m_Bits: 512
   EnemyMask:
     serializedVersion: 2
     m_Bits: 1024

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Mob : MonoBehaviour
 {
+    // Unity doesn't like it when you're *too* close to things
+    float PlanckDistance = .001f;
     public LayerMask WallMask;
 
     protected void Walk(Vector3 toWalk)
@@ -14,9 +16,9 @@ public class Mob : MonoBehaviour
 
         if (toWalk.x != 0)
         {
-            if (Physics.BoxCast(transform.position, Vector3.one / 2f, Vector3.right * Mathf.Sign(toWalk.x), out raycastHit, Quaternion.identity, Mathf.Abs(toWalk.x), WallMask))
+            if (Physics.SphereCast(transform.position, .5f - PlanckDistance, Vector3.right * Mathf.Sign(toWalk.x), out raycastHit, Mathf.Abs(toWalk.x), WallMask))
             {
-                workingMovementDelta.x = raycastHit.distance * Mathf.Sign(toWalk.x);
+                workingMovementDelta.x = (raycastHit.distance - PlanckDistance) * Mathf.Sign(toWalk.x);
             }
             else
             {
@@ -26,9 +28,9 @@ public class Mob : MonoBehaviour
 
         if (toWalk.z != 0)
         {
-            if (Physics.BoxCast(transform.position, Vector3.one / 2f, Vector3.forward * Mathf.Sign(toWalk.z), out raycastHit, Quaternion.identity, Mathf.Abs(toWalk.z), WallMask))
+            if (Physics.SphereCast(transform.position, .5f - PlanckDistance, Vector3.forward * Mathf.Sign(toWalk.z), out raycastHit, Mathf.Abs(toWalk.z), WallMask))
             {
-                workingMovementDelta.z = raycastHit.distance * Mathf.Sign(toWalk.z);
+                workingMovementDelta.z = (raycastHit.distance - PlanckDistance) * Mathf.Sign(toWalk.z);
             }
             else
             {

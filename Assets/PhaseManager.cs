@@ -11,7 +11,9 @@ public class PhaseManager : MonoBehaviour
     public GameObject ExplosionInstance;
     public PlayerMob PlayerMobInstance;
     public GameObject RuneCursorInstance;
+    public MapGenerator MapGeneratorInstance;
     public LayerMask FloorMask;
+    public LayerMask WallMask;
     public LayerMask EnemyMask;
 
     public Image WaitCircle;
@@ -40,6 +42,11 @@ public class PhaseManager : MonoBehaviour
     {
         ExhaustionTimeHud.gameObject.SetActive(false);
         PostRoundHud.gameObject.SetActive(false);
+    }
+
+    private void Start()
+    {
+        MapGeneratorInstance.GenerateMap();
     }
 
     private void Update()
@@ -86,14 +93,14 @@ public class PhaseManager : MonoBehaviour
         Ray cursorRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit floorHit;
 
-        if (!Physics.Raycast(cursorRay, out floorHit, float.MaxValue, FloorMask))
+        if (!Physics.Raycast(cursorRay, out floorHit, float.MaxValue, FloorMask | WallMask))
         {
             RuneCursorInstance.SetActive(false);
         }
         else
         {
             RuneCursorInstance.SetActive(true);
-            RuneCursorInstance.transform.position = floorHit.point + Vector3.up * .1f;
+            RuneCursorInstance.transform.position = new Vector3(floorHit.point.x, .1f, floorHit.point.z);
             RuneCursorInstance.transform.localScale = Vector3.one * ExplosionScale;
         }
     }

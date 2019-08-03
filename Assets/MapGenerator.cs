@@ -4,33 +4,55 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
+    public Sprite MapSprite;
     public TerrainGenerator TerrainGeneratorInstance;
     public MobGenerator MobGeneratorInstance;
     public PlayerMob PlayerMobInstance;
 
-    private void Start()
+    public void GenerateMap()
     {
-        for (int xx = 1; xx <= 20; xx++)
+        Vector3 playerSpawnLocation = Vector3.zero;
+
+        for (int xx = 0; xx < MapSprite.texture.width; xx++)
         {
-            for (int zz = 1; zz <= 20; zz++)
+            for (int yy = 0; yy < MapSprite.texture.height; yy++)
             {
-                if (xx == 1 || xx == 20 || zz == 1 || zz == 20)
+                Vector3 position = new Vector3(xx, 0, yy);
+                Color ColorAtPixel = MapSprite.texture.GetPixel(xx, yy);
+
+                if (ColorAtPixel == Color.black)
                 {
-                    TerrainGeneratorInstance.CreateWall(new Vector3(xx, 0, zz));
+                    TerrainGeneratorInstance.CreateWall(position);
+                }
+                else if (ColorAtPixel == new Color(128, 128, 128))
+                {
+                    // this space intentionally left blank
                 }
                 else
                 {
-                    TerrainGeneratorInstance.CreateFloor(new Vector3(xx, 0, zz));
+                    TerrainGeneratorInstance.CreateFloor(position);
+
+                    if (ColorAtPixel == Color.white)
+                    {
+                        // this space intentionally left blank
+                        // we already made a floor here
+                    }
+                    else if (ColorAtPixel == new Color(255 / 255f, 106 / 255f, 0, 1f))
+                    {
+                        MobGeneratorInstance.CreateEnemyCrab(position);
+                    }
+                    else if (ColorAtPixel == new Color(127f / 255f, 255f / 255f, 255f / 255f, 1f))
+                    {
+                        playerSpawnLocation = position;
+                    }
+                    else
+                    {
+                        Debug.Log($"Unrecognized color at ({xx}, {yy}): ({ColorAtPixel.r}, {ColorAtPixel.g}, {ColorAtPixel.b})");
+                    }
                 }
             }
         }
 
-        MobGeneratorInstance.CreateEnemyCrab(new Vector3(4f, 0, 4f));
-        MobGeneratorInstance.CreateEnemyCrab(new Vector3(8f, 0, 2.5f));
-        MobGeneratorInstance.CreateEnemyCrab(new Vector3(7f, 0, 14f));
-        MobGeneratorInstance.CreateEnemyCrab(new Vector3(4f, 0, 18f));
-        MobGeneratorInstance.CreateEnemyCrab(new Vector3(17f, 0, 3f));
-
-        PlayerMobInstance.transform.position = new Vector3(10f, 0, 10f);
+        PlayerMobInstance.transform.position = playerSpawnLocation;
     }
 }
