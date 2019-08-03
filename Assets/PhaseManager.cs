@@ -13,17 +13,17 @@ public class PhaseManager : MonoBehaviour
     public GameObject RuneCursorInstance;
     public MapGenerator MapGeneratorInstance;
     public LayerMask FloorMask;
-    public LayerMask WallMask;
     public LayerMask EnemyMask;
+    public LevelManager LevelManagerInstance;
 
     public Image WaitCircle;
     public Transform ExhaustionTimeHud;
 
     Vector3 CameraOffsetFromPlayer { get; } = Vector3.up * 10f + Vector3.back * 2.5f;
-    Vector3 CameraOffsetFromExplosionCursor { get; } = Vector3.up * 2f + Vector3.back * 10f;
+    Vector3 CameraOffsetFromExplosionCursor { get; } = Vector3.up * 2.5f + Vector3.back * 5f;
     float TimeForExplosionCursorCameraApproach { get; } = .7f;
     float StandardCameraDownTilt { get; } = 70f;
-    float ExplosionCameraDowntilt { get; } = 5f;
+    float ExplosionCameraDowntilt { get; } = 10f;
     float TimeForReturnToPlayerCameraApproach { get; } = .5f;
 
     float ExplosionScale { get; set; } = 4f;
@@ -35,18 +35,28 @@ public class PhaseManager : MonoBehaviour
     public Transform PostRoundHud;
     public Text FlavorLabel;
     public Text StatisticsLabel;
+    public Button NextLevelButton;
+    public Button AlwaysReturnToLevelSelect;
 
     int ExplosionHits { get; set; } = 0;
 
     private void Awake()
     {
+        CurrentGameState = GameState.Movement;
         ExhaustionTimeHud.gameObject.SetActive(false);
         PostRoundHud.gameObject.SetActive(false);
     }
 
     private void Start()
     {
-        MapGeneratorInstance.GenerateMap();
+        GameLevel toLoad = MainMenuControl.SelectedLevel;
+
+        if (toLoad == null)
+        {
+            toLoad = LevelManagerInstance.GetLevel(0);
+        }
+        
+        MapGeneratorInstance.GenerateMap(toLoad);
     }
 
     private void Update()
@@ -73,6 +83,11 @@ public class PhaseManager : MonoBehaviour
                     break;
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ReturnToLevelSelect();
+        }
     }
 
     private void LateUpdate()
@@ -93,7 +108,7 @@ public class PhaseManager : MonoBehaviour
         Ray cursorRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit floorHit;
 
-        if (!Physics.Raycast(cursorRay, out floorHit, float.MaxValue, FloorMask | WallMask))
+        if (!Physics.Raycast(cursorRay, out floorHit, float.MaxValue, FloorMask))
         {
             RuneCursorInstance.SetActive(false);
         }
@@ -133,6 +148,7 @@ public class PhaseManager : MonoBehaviour
     {
         CurrentGameState = GameState.Defeated;
         ExhaustionTimeHud.gameObject.SetActive(false);
+        AlwaysReturnToLevelSelect.gameObject.SetActive(false);
 
         FlavorLabel.text = "You Got Bop'd";
 
@@ -146,6 +162,7 @@ public class PhaseManager : MonoBehaviour
         }
         
         PostRoundHud.gameObject.SetActive(true);
+        NextLevelButton.gameObject.SetActive(false);
     }
 
     void StartSafePhase()
@@ -153,6 +170,7 @@ public class PhaseManager : MonoBehaviour
         CurrentGameState = GameState.Safe;
         WaitCircle.fillAmount = 0f;
         FlavorLabel.text = "Another Explosion,\nAnother Good Day.";
+        AlwaysReturnToLevelSelect.gameObject.SetActive(false);
 
         if (ExplosionHits > 0)
         {
@@ -164,6 +182,24 @@ public class PhaseManager : MonoBehaviour
         }
 
         PostRoundHud.gameObject.SetActive(true);
+
+        if (MainMenuControl.SelectedLevel != null)
+        {
+            LevelManagerInstance.ClearLevel(MainMenuControl.SelectedLevel, ExplosionHits);
+
+            if (LevelManagerInstance.GameLevelCount > MainMenuControl.SelectedLevel.LevelIndex + 1)
+            {
+                NextLevelButton.gameObject.SetActive(true);
+            }
+            else
+            {
+                NextLevelButton.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            NextLevelButton.gameObject.SetActive(false);
+        }
     }
 
     void UpdateHUD()
@@ -239,9 +275,28 @@ public class PhaseManager : MonoBehaviour
         StartDefeatedPhase();
     }
 
-    public void NextDayButton()
+    public void LevelSelectButton()
+    {
+        MainMenuControl.ShowLevelSelect = true;
+        SceneManager.LoadScene(0);
+    }
+
+    public void RetryButton()
     {
         CurrentGameState = GameState.Movement;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void ToNextLevelButton()
+    {
+        CurrentGameState = GameState.Movement;
+        MainMenuControl.SelectedLevel = LevelManagerInstance.GetLevel(MainMenuControl.SelectedLevel.LevelIndex + 1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void ReturnToLevelSelect()
+    {
+        MainMenuControl.ShowLevelSelect = true;
+        SceneManager.LoadScene(0);
     }
 }

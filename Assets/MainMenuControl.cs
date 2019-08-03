@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuControl : MonoBehaviour
 {
+    public static bool ShowLevelSelect { get; set; } = false;
+    public static GameLevel SelectedLevel { get; set; }
     public Camera ActiveCamera;
 
     public Color ColorOne;
@@ -14,7 +16,21 @@ public class MainMenuControl : MonoBehaviour
     float ColorPongTime { get; set; } = 8f;
     float RotationSpeed { get; set; } = 10f;
 
+    public Transform FirstMenu;
+    public Transform LevelSelection;
+    public Transform LevelsParent;
+    public LevelButton LevelButtonTemplate;
+    public LevelManager LevelManagerInstance;
+
     public List<Transform> RuneCircles;
+
+    private void Awake()
+    {
+        FirstMenu.gameObject.SetActive(!ShowLevelSelect);
+        LevelSelection.gameObject.SetActive(ShowLevelSelect);
+
+        EstablishLevelSelect();
+    }
 
     private void Update()
     {
@@ -29,6 +45,25 @@ public class MainMenuControl : MonoBehaviour
 
     public void StartGameButton()
     {
+        FirstMenu.gameObject.SetActive(false);
+        LevelSelection.gameObject.SetActive(true);
+    }
+
+    public void LevelSelected(GameLevel selected)
+    {
+        SelectedLevel = selected;
         SceneManager.LoadScene(1);
+    }
+
+    void EstablishLevelSelect()
+    {
+        LevelButtonTemplate.gameObject.SetActive(false);
+
+        for (int ii = 0; ii < LevelManagerInstance.GameLevelCount; ii++)
+        {
+            LevelButton newButton = Instantiate(LevelButtonTemplate, LevelsParent);
+            newButton.SetGameLevel(LevelManagerInstance.GetLevel(ii));
+            newButton.gameObject.SetActive(true);
+        }
     }
 }

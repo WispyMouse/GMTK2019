@@ -4,27 +4,26 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
-    public Sprite MapSprite;
     public TerrainGenerator TerrainGeneratorInstance;
     public MobGenerator MobGeneratorInstance;
     public PlayerMob PlayerMobInstance;
 
-    public void GenerateMap()
+    public void GenerateMap(GameLevel toGenerate)
     {
         Vector3 playerSpawnLocation = Vector3.zero;
 
-        for (int xx = 0; xx < MapSprite.texture.width; xx++)
+        for (int xx = 0; xx < toGenerate.LevelMap.texture.width; xx++)
         {
-            for (int yy = 0; yy < MapSprite.texture.height; yy++)
+            for (int yy = 0; yy < toGenerate.LevelMap.texture.height; yy++)
             {
                 Vector3 position = new Vector3(xx, 0, yy);
-                Color ColorAtPixel = MapSprite.texture.GetPixel(xx, yy);
+                Color ColorAtPixel = toGenerate.LevelMap.texture.GetPixel(xx, yy);
 
                 if (ColorAtPixel == Color.black)
                 {
                     TerrainGeneratorInstance.CreateWall(position);
                 }
-                else if (ColorAtPixel == new Color(128, 128, 128))
+                else if (ColorAtPixel == new Color(128 / 255f, 128 / 255f, 128 / 255f))
                 {
                     // this space intentionally left blank
                 }
