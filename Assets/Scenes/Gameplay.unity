@@ -1639,6 +1639,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c88c4adf35afcf4985ffd2ee9c33d31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WallMask:
+    serializedVersion: 2
+    m_Bits: 512
   PhaseManagerInstance: {fileID: 1888352801}
   PlayerSpriteRenderer: {fileID: 1139629133}
   PlayerWizardDefeatedSprite: {fileID: 21300000, guid: 92a996a445d905d4b9d77ccfa6208d06,

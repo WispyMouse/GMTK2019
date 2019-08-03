@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMob : MonoBehaviour
+public class PlayerMob : Mob
 {
     const float MovementSpeed = 6.5f;
     const float ExhaustionMovementSpeed = .25f;
@@ -75,7 +75,7 @@ public class PlayerMob : MonoBehaviour
             curMovementSpeed = ExhaustionMovementSpeed;
         }
 
-        transform.position = transform.position + movementInput * Time.deltaTime * curMovementSpeed;
+        Walk(movementInput * Time.deltaTime * curMovementSpeed);
     }
 
     void HandleHurtTime()

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyCrab : MonoBehaviour
+public class EnemyCrab : Mob
 {
     public PlayerMob PlayerMobInstance { get; set; }
     const float MovementSpeed = 3.5f;
@@ -46,7 +46,7 @@ public class EnemyCrab : MonoBehaviour
     void HandleMovement()
     {
         Vector3 targetPosition = Vector3.MoveTowards(transform.position, PlayerMobInstance.transform.position, Time.deltaTime * MovementSpeed);
-        transform.position = targetPosition;
+        Walk(targetPosition - transform.position);
     }
 
     public IEnumerator DefeatAnimationStartup(Vector3 explosionEpicenter)

@@ -46,6 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd247e83cf0ce4642b2dd9060331ad3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WallMask:
+    serializedVersion: 2
+    m_Bits: 512
   EnemySprite: {fileID: 2556889405083671629}
 --- !u!65 &1828307635
 BoxCollider:
