@@ -43,6 +43,11 @@ public class EnemyCrab : EnemyMob
 
         if (AttackStage == AttackPattern.Rest)
         {
+            if (PhaseManager.CurrentGameState == GameState.Exhaustion)
+            {
+                CurPhaseTime += Time.deltaTime * .55f; // A small hand to punish players for exhaustion
+            }
+
             if (CurPhaseTime > RestTime)
             {
                 CurPhaseTime -= RestTime;
@@ -52,6 +57,11 @@ public class EnemyCrab : EnemyMob
         }
         else if(AttackStage == AttackPattern.Charge)
         {
+            if (PhaseManager.CurrentGameState == GameState.Exhaustion)
+            {
+                CurPhaseTime += Time.deltaTime * .15f; // Similar to above, but we don't want to rush through the "animation" as much
+            }
+
             if (CurPhaseTime > ChargeTime)
             {
                 CurPhaseTime -= ChargeTime;

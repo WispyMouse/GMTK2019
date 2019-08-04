@@ -74,9 +74,11 @@
     <Compile Include="Assets\Mobs\EnemyFrog.cs" />
     <Compile Include="Assets\Mobs\EnemyMob.cs" />
     <Compile Include="Assets\Mobs\EnemyPlatypus.cs" />
+    <Compile Include="Assets\Mobs\EnemySnail.cs" />
     <Compile Include="Assets\Mobs\FacesCamera.cs" />
     <Compile Include="Assets\Mobs\Mob.cs" />
     <Compile Include="Assets\Mobs\PlayerMob.cs" />
+    <Compile Include="Assets\Mobs\SnailFire.cs" />
     <Compile Include="Assets\PhaseManager.cs" />
     <Compile Include="Assets\RuneCursor.cs" />
     <Compile Include="Assets\SoundPlayer.cs" />

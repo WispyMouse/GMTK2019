@@ -16,6 +16,7 @@ public class MapGenerator : MonoBehaviour
     public EnemyCrab GiantEnemyCrabPF;
     public EnemyFrog EnemyFrogPF;
     public EnemyFrog GiantEnemyFrogPF;
+    public EnemySnail EnemySnailPF;
 
     public EnemyPlatypus PlatypusPF;
 
@@ -86,6 +87,11 @@ public class MapGenerator : MonoBehaviour
                     {
                         EnemyFrog newFrog = Instantiate(GiantEnemyFrogPF, position, Quaternion.identity, transform);
                         newFrog.PlayerMobInstance = PlayerMobInstance;
+                    }
+                    else if (ColorAtPixel == new Color(255f / 255f, 0 / 255f, 110f / 255f, 1f))
+                    {
+                        EnemySnail newSnail = Instantiate(EnemySnailPF, position, Quaternion.identity, transform);
+                        newSnail.PlayerMobInstance = PlayerMobInstance;
                     }
                     else if (spawnDictionary.ContainsKey(ColorAtPixel))
                     {

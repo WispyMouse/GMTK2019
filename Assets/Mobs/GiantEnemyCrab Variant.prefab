@@ -14,18 +14,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2556889403962733159, guid: 416d5526c56b02d4c8462edf2f46861f,
         type: 3}
+      propertyPath: IsGiant
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2556889403962733159, guid: 416d5526c56b02d4c8462edf2f46861f,
+        type: 3}
       propertyPath: MovementSpeed
-      value: 5.5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2556889403962733159, guid: 416d5526c56b02d4c8462edf2f46861f,
         type: 3}
       propertyPath: AttackTime
-      value: 0.8
+      value: 0.55
       objectReference: {fileID: 0}
     - target: {fileID: 2556889403962733159, guid: 416d5526c56b02d4c8462edf2f46861f,
         type: 3}
-      propertyPath: IsGiant
-      value: 1
+      propertyPath: RestTime
+      value: 0.55
       objectReference: {fileID: 0}
     - target: {fileID: 2556889403962733158, guid: 416d5526c56b02d4c8462edf2f46861f,
         type: 3}

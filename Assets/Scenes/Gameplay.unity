@@ -11898,6 +11898,8 @@ MonoBehaviour:
     type: 3}
   GiantEnemyFrogPF: {fileID: 7744668962911371256, guid: efae587acf4b27140986e50c5b486638,
     type: 3}
+  EnemySnailPF: {fileID: 3375024399081412208, guid: 9556457278ad47d458100ba6f2842ab6,
+    type: 3}
   PlatypusPF: {fileID: 4574062981666434509, guid: cbbdacb192d30f6428a6dc4a9a3a70f6,
     type: 3}
   WASDRunePF: {fileID: 2706443299342803755, guid: 1248c0fb4676a43429f483e54afc0515,

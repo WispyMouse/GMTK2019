@@ -92,6 +92,12 @@ public class EnemyFrog : EnemyMob
                 EnemySprite.sprite = FrogFalling;
 
                 Vector3 randomCircle = Random.onUnitSphere;
+
+                if (IsGiant)
+                {
+                    randomCircle = randomCircle * 1.5f;
+                }
+
                 FrogShadow.transform.position = PlayerMobInstance.transform.position + new Vector3(randomCircle.x * .5f, 0, randomCircle.z * .5f);
                 transform.position = FrogShadow.transform.position + Vector3.up * FallingSpeed * FallingTime;
 
