@@ -9,6 +9,9 @@ public class PhaseManager : MonoBehaviour
 {
     public static GameState CurrentGameState { get; set; } = GameState.Movement;
     public GameObject ExplosionInstance;
+    public ParticleSystem PreExplosionParticleSystem;
+    public ParticleSystem PostExplosionParticleSystem;
+    public ParticleSystem LastWarmupExplosionParticleSystem;
     public PlayerMob PlayerMobInstance;
     public GameObject RuneCursorInstance;
     public MapGenerator MapGeneratorInstance;
@@ -22,12 +25,12 @@ public class PhaseManager : MonoBehaviour
 
     Vector3 CameraOffsetFromPlayer { get; } = Vector3.up * 13f + Vector3.back * 4f;
     Vector3 CameraOffsetFromExplosionCursor { get; } = Vector3.up * 2.5f + Vector3.back * 5f;
-    float TimeForExplosionCursorCameraApproach { get; } = .8f;
+    float TimeForExplosionCursorCameraApproach { get; } = 1.3f;
     float StandardCameraDownTilt { get; } = 75f;
     float ExplosionCameraDowntilt { get; } = 10f;
     float TimeForReturnToPlayerCameraApproach { get; } = .3f;
 
-    float ExplosionScale { get; set; } = 5f;
+    float ExplosionScale { get; set; } = 6f;
     float CurExhaustionTime { get; set; } = 0;
     float ExhaustionTime { get; } = 4.5f;
 
@@ -221,6 +224,10 @@ public class PhaseManager : MonoBehaviour
         Vector3 startingCameraPosition = Camera.main.transform.position;
         Vector3 targetPosition = RuneCursorInstance.transform.position + CameraOffsetFromExplosionCursor;
 
+        PreExplosionParticleSystem.transform.position = RuneCursorInstance.transform.position;
+        PreExplosionParticleSystem.gameObject.SetActive(true);
+        PreExplosionParticleSystem.Play();
+
         while (currentCameraTime < TimeForExplosionCursorCameraApproach)
         {
             currentCameraTime += Time.deltaTime;
@@ -237,10 +244,31 @@ public class PhaseManager : MonoBehaviour
 
     IEnumerator ShowExplosion()
     {
+        LastWarmupExplosionParticleSystem.transform.position = RuneCursorInstance.transform.position;
+        LastWarmupExplosionParticleSystem.gameObject.SetActive(true);
+        LastWarmupExplosionParticleSystem.Play();
+
+        yield return new WaitForSeconds(.8f);
+
+        PreExplosionParticleSystem.gameObject.SetActive(false);
+        LastWarmupExplosionParticleSystem.gameObject.SetActive(false);
+        PostExplosionParticleSystem.transform.position = RuneCursorInstance.transform.position;
+        PostExplosionParticleSystem.gameObject.SetActive(true);
+        PostExplosionParticleSystem.Play();
+
         ExplosionInstance.transform.position = RuneCursorInstance.transform.position;
-        ExplosionInstance.transform.localScale = Vector3.one * ExplosionScale;
         ExplosionInstance.gameObject.SetActive(true);
         SoundPlayer.PlaySound(BigExplosionSound);
+
+        float curExplosionTime = 0;
+        float totalExplosionTime = .6f;
+
+        while (curExplosionTime < totalExplosionTime)
+        {
+            ExplosionInstance.transform.localScale = Vector3.one * (curExplosionTime / totalExplosionTime) * ExplosionScale;
+            curExplosionTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
         yield return new WaitForSeconds(.6f);
 
         Collider[] enemyHits = Physics.OverlapSphere(RuneCursorInstance.transform.position, ExplosionScale * .5f, EnemyMask, QueryTriggerInteraction.Collide);
@@ -253,6 +281,8 @@ public class PhaseManager : MonoBehaviour
         }
 
         yield return new WaitForSeconds(.4f);
+
+        PostExplosionParticleSystem.gameObject.SetActive(false);
 
         ExplosionInstance.gameObject.SetActive(false);
         yield return ReturnCameraToPlayer();
