@@ -30,7 +30,6 @@ public class MapGenerator : MonoBehaviour
         Vector3 playerSpawnLocation = Vector3.zero;
 
         Dictionary<Color, GameObject> spawnDictionary = new Dictionary<Color, GameObject>();
-        spawnDictionary.Add(new Color(72f / 255f, 0, 255f / 255f, 1f), ExplosionStaffPF);
         spawnDictionary.Add(new Color(0f, 0f, 0f, 1f), WallPF);
         spawnDictionary.Add(new Color(127f / 255f, 63f / 255f, 91f / 255f, 1f), TallWallPF);
 
@@ -62,6 +61,11 @@ public class MapGenerator : MonoBehaviour
                     {
                         // this space intentionally left blank
                         // we already made a floor here
+                    }
+                    else if (ColorAtPixel == new Color(72f / 255f, 0, 255f / 255f, 1f))
+                    {
+                        GameObject explosionStaff = Instantiate(ExplosionStaffPF, position, Quaternion.identity, transform);
+                        PlayerMobInstance.ExplosionStaffInstance = explosionStaff;
                     }
                     else if (ColorAtPixel == new Color(255f / 255f, 106 / 255f, 0, 1f))
                     {

@@ -31,6 +31,10 @@ public class PlayerMob : Mob
     public AudioClip ExhaustionSound;
     public AudioClip StaffGet;
 
+    public GameObject ExplosionStaffInstance { get; set; }
+    public Transform GuideArrow;
+    public GameObject GemOfBraggingRightsInstance { get; set; }
+
     void Update()
     {
         switch (PhaseManager.CurrentGameState)
@@ -43,6 +47,27 @@ public class PlayerMob : Mob
             default:
                 PlayerSpriteRenderer.enabled = true;
                 break;
+        }
+
+        if (ExplosionStaffInstance != null || GemOfBraggingRightsInstance != null)
+        {
+            Vector3 target;
+
+            if (GemOfBraggingRightsInstance != null)
+            {
+                target = GemOfBraggingRightsInstance.transform.position;
+            }
+            else
+            {
+                target = ExplosionStaffInstance.transform.position;
+            }
+
+            GuideArrow.transform.rotation = Quaternion.Euler(90f, Vector3.SignedAngle(target - transform.position, Vector3.right, Vector3.down), 0);
+            GuideArrow.gameObject.SetActive(true);
+        }
+        else
+        {
+            GuideArrow.gameObject.SetActive(false);
         }
     }
 

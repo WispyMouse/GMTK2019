@@ -8,6 +8,7 @@ public class EnemyPlatypus : EnemyCrab
 
     protected override void DropItem()
     {
-        Instantiate(GemOfBraggingRights, new Vector3(transform.position.x, 0, transform.position.z), Quaternion.identity);
+        GameObject gemOfBraggingRights = Instantiate(GemOfBraggingRights, new Vector3(transform.position.x, 0, transform.position.z), Quaternion.identity);
+        PlayerMobInstance.GemOfBraggingRightsInstance = gemOfBraggingRights;
     }
 }
