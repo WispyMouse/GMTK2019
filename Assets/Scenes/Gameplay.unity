@@ -1584,7 +1584,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.8301887, g: 0.8301887, b: 0.8301887, a: 0}
+  m_BackGroundColor: {r: 0.254717, g: 0.254717, b: 0.254717, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1832,7 +1832,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 67264a6a96d4ff948b80a98aa4087723, type: 3}
+  m_Sprite: {fileID: -5331764162161683478, guid: 67264a6a96d4ff948b80a98aa4087723,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2140,13 +2141,15 @@ MonoBehaviour:
   MobSprite: {fileID: 1139629133}
   PhaseManagerInstance: {fileID: 1888352801}
   PlayerSpriteRenderer: {fileID: 1139629133}
-  PlayerWizardDefeatedSprite: {fileID: 21300000, guid: 92a996a445d905d4b9d77ccfa6208d06,
+  PlayerWizardDefeatedSprite: {fileID: 7245163553653630020, guid: 67264a6a96d4ff948b80a98aa4087723,
     type: 3}
-  PlayerWizardExhaustedSprite: {fileID: 21300000, guid: 15c977abfdcf7b84299cd0c7a2700e97,
+  PlayerWizardExhaustedSprite: {fileID: -3997937855412814716, guid: 67264a6a96d4ff948b80a98aa4087723,
     type: 3}
-  PlayerWizardExhaustedDefeatedSprite: {fileID: 21300000, guid: a6b24c6c315c03b46b0d7a37616c8d5b,
+  PlayerWizardExhaustedDefeatedSprite: {fileID: 3793040632862751878, guid: 67264a6a96d4ff948b80a98aa4087723,
     type: 3}
-  PlayerWizardWithStaffSprite: {fileID: 21300000, guid: aac941579cc471442b2e4971640a5412,
+  PlayerWizardWithStaffSprite: {fileID: -4481559218570896856, guid: 67264a6a96d4ff948b80a98aa4087723,
+    type: 3}
+  PlayerWizardCastingSprite: {fileID: 3262065147598448038, guid: 67264a6a96d4ff948b80a98aa4087723,
     type: 3}
   ExplosionStaffMask:
     serializedVersion: 2

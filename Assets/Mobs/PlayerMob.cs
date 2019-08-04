@@ -18,6 +18,7 @@ public class PlayerMob : Mob
     public Sprite PlayerWizardExhaustedSprite;
     public Sprite PlayerWizardExhaustedDefeatedSprite;
     public Sprite PlayerWizardWithStaffSprite;
+    public Sprite PlayerWizardCastingSprite;
     public LayerMask ExplosionStaffMask;
 
     float CurWalkTime { get; set; } = 0;
@@ -185,5 +186,10 @@ public class PlayerMob : Mob
         Destroy(other.gameObject);
 
         PhaseManagerInstance.PlayerPicksUpStaff();
+    }
+
+    public void CastingState()
+    {
+        PlayerSpriteRenderer.sprite = PlayerWizardCastingSprite;
     }
 }

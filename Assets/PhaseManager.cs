@@ -149,6 +149,7 @@ public class PhaseManager : MonoBehaviour
     void StartExplosionPhase()
     {
         CurrentGameState = GameState.Explosion;
+        PlayerMobInstance.CastingState();
         StartCoroutine(ExplosionCameraApproach());
     }
 
