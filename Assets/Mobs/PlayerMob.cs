@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMob : Mob
 {
     const float MovementSpeed = 6.25f;
+    const float FinalBossExhaustionSpeed = .9f;
     const float ExhaustionMovementSpeed = .35f;
 
     public PhaseManager PhaseManagerInstance;
@@ -105,21 +106,21 @@ public class PlayerMob : Mob
 
         if (PhaseManager.CurrentGameState == GameState.Exhaustion)
         {
-            curMovementSpeed = ExhaustionMovementSpeed;
+            if (MainMenuControl.SelectedLevel.FinalBossChapter)
+            {
+                curMovementSpeed = FinalBossExhaustionSpeed;
+            }
+            else
+            {
+                curMovementSpeed = ExhaustionMovementSpeed;
+            }
         }
 
         Walk(movementInput * Time.deltaTime * curMovementSpeed);
 
         if (PhaseManager.CurrentGameState == GameState.Exhaustion)
         {
-            if (MainMenuControl.SelectedLevel.FinalBossChapter)
-            {
-                CurWalkTime += Time.deltaTime * .45f; // make it a little faster to get the GEM OF BRAGGING RIGHTS
-            }
-            else
-            {
-                CurWalkTime += Time.deltaTime * .25f;
-            }
+            CurWalkTime += Time.deltaTime * .25f;
         }
         else
         {
@@ -132,11 +133,11 @@ public class PlayerMob : Mob
 
             if (PhaseManager.CurrentGameState == GameState.Exhaustion)
             {
-                SoundPlayer.PlayBoomingSound(WalkSound, .25f);
+                SoundPlayer.PlayBoomingSound(WalkSound, .45f);
             }
             else
             {
-                SoundPlayer.PlayPitchAdjustedSound(WalkSound, .25f);
+                SoundPlayer.PlayPitchAdjustedSound(WalkSound, .45f);
             }
         }
     }
