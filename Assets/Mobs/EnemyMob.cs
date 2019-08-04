@@ -74,6 +74,8 @@ public class EnemyMob : Mob
             yield return new WaitForEndOfFrame();
         }
 
+        DropItem();
+
         gameObject.SetActive(false);
     }
 
@@ -119,5 +121,10 @@ public class EnemyMob : Mob
         }
 
         playerMobInstance.TakeDamage(1);
+    }
+
+    protected virtual void DropItem()
+    {
+
     }
 }

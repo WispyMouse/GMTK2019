@@ -11,6 +11,7 @@ public class PhaseManager : MonoBehaviour
     public GameObject ExplosionInstance;
     public ParticleSystem PreExplosionParticleSystem;
     public ParticleSystem PostExplosionParticleSystem;
+    public ParticleSystem PostExplosionYellowParticleSystem;
     public ParticleSystem LastWarmupExplosionParticleSystem;
     public PlayerMob PlayerMobInstance;
     public GameObject RuneCursorInstance;
@@ -61,6 +62,15 @@ public class PhaseManager : MonoBehaviour
 
     private void Start()
     {
+        if (PlayerPrefs.GetInt("BraggingRights", 0) == 1)
+        {
+            ExplosionScale = 12f;
+        }
+        else
+        {
+            ExplosionScale = 6f;
+        }
+
         if (MainMenuControl.SelectedLevel == null)
         {
             MainMenuControl.SelectedLevel = LevelManagerInstance.GetLevel(0);
@@ -140,6 +150,11 @@ public class PhaseManager : MonoBehaviour
 
     void HandleKOTime()
     {
+        if (MainMenuControl.SelectedLevel.FinalBossChapter)
+        {
+            return;
+        }
+
         ExhaustionTimeHud.gameObject.SetActive(true);
         CurExhaustionTime += Time.deltaTime;
         WaitCircle.fillAmount = 1f - (CurExhaustionTime / ExhaustionTime);
@@ -257,9 +272,15 @@ public class PhaseManager : MonoBehaviour
 
         PreExplosionParticleSystem.gameObject.SetActive(false);
         LastWarmupExplosionParticleSystem.gameObject.SetActive(false);
+
         PostExplosionParticleSystem.transform.position = RuneCursorInstance.transform.position;
         PostExplosionParticleSystem.gameObject.SetActive(true);
         PostExplosionParticleSystem.Play();
+
+        PostExplosionYellowParticleSystem.transform.position = RuneCursorInstance.transform.position;
+        PostExplosionYellowParticleSystem.gameObject.SetActive(true);
+        PostExplosionYellowParticleSystem.Play();
+
         ExplosionScorchMarkInstance.transform.position = RuneCursorInstance.transform.position;
         ExplosionScorchMarkInstance.transform.rotation = Quaternion.Euler(0, Random.Range(0, 360f), 0);
         ExplosionScorchMarkInstance.transform.localScale = Vector3.one * ExplosionScale;
@@ -292,6 +313,7 @@ public class PhaseManager : MonoBehaviour
         yield return new WaitForSeconds(.4f);
 
         PostExplosionParticleSystem.gameObject.SetActive(false);
+        PostExplosionYellowParticleSystem.gameObject.SetActive(false);
 
         ExplosionInstance.gameObject.SetActive(false);
         yield return ReturnCameraToPlayer();
@@ -351,5 +373,30 @@ public class PhaseManager : MonoBehaviour
     public void PlayerPicksUpStaff()
     {
         PlayerHasStaff = true;
+    }
+
+    public void PlayerPicksUpGemOfBraggingRights()
+    {
+        PlayerPrefs.SetInt("BraggingRights", 1);
+
+        CurrentGameState = GameState.Safe;
+        WaitCircle.fillAmount = 0f;
+        FlavorLabel.text = "We defeated the 「ENIGMA BEAST」!\nWe retrieved the 「GEM OF BRAGGING RIGHTS」!";
+        AlwaysReturnToLevelSelect.gameObject.SetActive(false);
+
+        StatisticsLabel.text = $"From now on, our 「EXPLOSION」 range is doubled!";
+
+        PostRoundHud.gameObject.SetActive(true);
+
+        LevelManagerInstance.ClearLevel(MainMenuControl.SelectedLevel, ExplosionHits);
+
+        if (LevelManagerInstance.GameLevelCount > MainMenuControl.SelectedLevel.LevelIndex + 1)
+        {
+            NextLevelButton.gameObject.SetActive(true);
+        }
+        else
+        {
+            NextLevelButton.gameObject.SetActive(false);
+        }
     }
 }

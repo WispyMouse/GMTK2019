@@ -16,6 +16,8 @@ public class MapGenerator : MonoBehaviour
     public EnemyFrog EnemyFrogPF;
     public EnemyFrog GiantEnemyFrogPF;
 
+    public EnemyPlatypus PlatypusPF;
+
     public GameObject WASDRunePF;
     public GameObject RightClickRunePF;
     public GameObject GetRunePF;
@@ -26,13 +28,14 @@ public class MapGenerator : MonoBehaviour
         Vector3 playerSpawnLocation = Vector3.zero;
 
         Dictionary<Color, GameObject> spawnDictionary = new Dictionary<Color, GameObject>();
+        spawnDictionary.Add(new Color(72f / 255f, 0, 255f / 255f, 1f), ExplosionStaffPF);
+        spawnDictionary.Add(new Color(0f, 0f, 0f, 1f), WallPF);
+        spawnDictionary.Add(new Color(127f / 255f, 63f / 255f, 91f / 255f, 1f), TallWallPF);
+
         spawnDictionary.Add(new Color(91f / 255f, 127f / 255f, 0, 1f), WASDRunePF);
         spawnDictionary.Add(new Color(0, 127f / 255f, 14f / 255f, 1f), GetRunePF);
         spawnDictionary.Add(new Color(0, 127f / 255f, 127f / 255f, 1f), RightClickRunePF);
         spawnDictionary.Add(new Color(0, 74f / 255f, 127f / 255f, 1f), ExplosionRunePF);
-        spawnDictionary.Add(new Color(72f / 255f, 0, 255f / 255f, 1f), ExplosionStaffPF);
-        spawnDictionary.Add(new Color(0f, 0f, 0f, 1f), WallPF);
-        spawnDictionary.Add(new Color(127f / 255f, 63f / 255f, 91f / 255f, 1f), TallWallPF);
 
         for (int xx = 0; xx < toGenerate.LevelMap.texture.width; xx++)
         {
@@ -63,6 +66,11 @@ public class MapGenerator : MonoBehaviour
                     {
                         EnemyCrab newCrab = Instantiate(GiantEnemyCrabPF, position, Quaternion.identity, transform);
                         newCrab.PlayerMobInstance = PlayerMobInstance;
+                    }
+                    else if (ColorAtPixel == new Color(214 / 255f, 127/ 255f, 255f / 255f, 1f))
+                    {
+                        EnemyPlatypus newPlatypus = Instantiate(PlatypusPF, position, Quaternion.identity, transform);
+                        newPlatypus.PlayerMobInstance = PlayerMobInstance;
                     }
                     else if (ColorAtPixel == new Color(76f / 255f, 255f / 255f, 0, 1f))
                     {

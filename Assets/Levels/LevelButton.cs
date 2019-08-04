@@ -15,7 +15,7 @@ public class LevelButton : MonoBehaviour
     {
         RepresentedGameLevel = toSet;
         this.AttachedButton.onClick.AddListener(() => { MainMenuControlInstance.LevelSelected(RepresentedGameLevel); });
-        this.LevelNameText.text = toSet.LevelName;
+        this.LevelNameText.text = toSet.LevelName.Substring(0, toSet.LevelName.IndexOf("\n"));
 
         if (!toSet.Accessible)
         {

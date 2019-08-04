@@ -8,6 +8,7 @@ public class GameLevel : ScriptableObject
     [TextArea]
     public string LevelName;
     public Sprite LevelMap;
+    public bool FinalBossChapter;
     
     public bool Accessible { get; set; }
     public int ExplosionScore { get; set; }

@@ -20,6 +20,7 @@ public class PlayerMob : Mob
     public Sprite PlayerWizardWithStaffSprite;
     public Sprite PlayerWizardCastingSprite;
     public LayerMask ExplosionStaffMask;
+    public LayerMask GemOfBraggingRightsMask;
 
     float CurWalkTime { get; set; } = 0;
     float TimeForWalkSound { get; } = .375f;
@@ -172,20 +173,23 @@ public class PlayerMob : Mob
 
     private void OnTriggerEnter(Collider other)
     {
-        if (PhaseManager.CurrentGameState != GameState.Movement)
+        if (ExplosionStaffMask == (ExplosionStaffMask | (1 << other.gameObject.layer)))
         {
-            return;
-        }
+            if (PhaseManager.CurrentGameState != GameState.Movement)
+            {
+                return;
+            }
 
-        if (ExplosionStaffMask != (ExplosionStaffMask | (1 << other.gameObject.layer)))
+            PlayerSpriteRenderer.sprite = PlayerWizardWithStaffSprite;
+            Destroy(other.gameObject);
+
+            PhaseManagerInstance.PlayerPicksUpStaff();
+        }
+        else if (GemOfBraggingRightsMask == (GemOfBraggingRightsMask | (1 << other.gameObject.layer)))
         {
-            return;
+            Destroy(other.gameObject);
+            PhaseManagerInstance.PlayerPicksUpGemOfBraggingRights();
         }
-
-        PlayerSpriteRenderer.sprite = PlayerWizardWithStaffSprite;
-        Destroy(other.gameObject);
-
-        PhaseManagerInstance.PlayerPicksUpStaff();
     }
 
     public void CastingState()

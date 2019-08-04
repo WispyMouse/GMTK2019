@@ -54,6 +54,11 @@ public class MainMenuControl : MonoBehaviour
 
         Color curColor = Color.Lerp(MintColorOne, MintColorTwo, Mathf.PingPong(CurMintColorTime, MintColorPongTime) / MintColorPongTime);
         CreditsText.text = $"Made by <color=#{ColorUtility.ToHtmlStringRGB(curColor)}>Mint</color> for GMTK 2019\n\n@WispyMouse";
+
+        if (Input.GetKeyDown(KeyCode.Home))
+        {
+            PlayerPrefs.DeleteAll();
+        }
     }
 
     public void StartGameButton()
