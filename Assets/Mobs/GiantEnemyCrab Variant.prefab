@@ -22,6 +22,11 @@ PrefabInstance:
       propertyPath: AttackTime
       value: 0.8
       objectReference: {fileID: 0}
+    - target: {fileID: 2556889403962733159, guid: 416d5526c56b02d4c8462edf2f46861f,
+        type: 3}
+      propertyPath: IsGiant
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2556889403962733158, guid: 416d5526c56b02d4c8462edf2f46861f,
         type: 3}
       propertyPath: m_LocalPosition.x

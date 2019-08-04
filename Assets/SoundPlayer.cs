@@ -8,6 +8,7 @@ public class SoundPlayer : MonoBehaviour
 
     public AudioSource StandardAudioSource;
     public List<AudioSource> PitchAdjustedAudioSources;
+    public AudioSource BoomingAudioSource;
     static bool Muted { get; set; } = false;
 
     public static void MuteSound()
@@ -46,5 +47,15 @@ public class SoundPlayer : MonoBehaviour
         }
 
         Singleton.PitchAdjustedAudioSources[Random.Range(0, Singleton.PitchAdjustedAudioSources.Count)].PlayOneShot(sound, volume);
+    }
+
+    public static void PlayBoomingSound(AudioClip sound, float volume = .5f)
+    {
+        if (Muted)
+        {
+            return;
+        }
+
+        Singleton.BoomingAudioSource.PlayOneShot(sound, volume);
     }
 }

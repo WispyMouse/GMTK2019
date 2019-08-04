@@ -61,7 +61,15 @@ public class EnemyCrab : EnemyMob
                 Vector3 actualTarget = Vector3.MoveTowards(transform.position, PlayerMobInstance.transform.position, MovementSpeed * AttackTime);
                 float adjustedMagnitudeModifier = Mathf.Min(1.5f, Vector3.Distance(transform.position, actualTarget) * .3f);
                 AttackTarget = actualTarget + new Vector3(Random.Range(-adjustedMagnitudeModifier, adjustedMagnitudeModifier), 0, Random.Range(-adjustedMagnitudeModifier, adjustedMagnitudeModifier));
-                SoundPlayer.PlayPitchAdjustedSound(CrabAttackSound, .25f);
+
+                if (IsGiant)
+                {
+                    SoundPlayer.PlayBoomingSound(CrabAttackSound, .25f);
+                }
+                else
+                {
+                    SoundPlayer.PlayPitchAdjustedSound(CrabAttackSound, .25f);
+                }
             }
         }
         else if(AttackStage == AttackPattern.Attack)

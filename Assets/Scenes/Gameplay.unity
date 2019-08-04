@@ -2153,6 +2153,7 @@ MonoBehaviour:
     m_Bits: 4096
   WalkSound: {fileID: 8300000, guid: 6e9d8c66362d11c43ac50d2d57545c71, type: 3}
   HurtSound: {fileID: 8300000, guid: 497fa7b1270ea694bb303ece0f509cfc, type: 3}
+  DefeatSound: {fileID: 8300000, guid: 825e127987d77704fbdc907db0488f4c, type: 3}
 --- !u!54 &1474509868
 Rigidbody:
   m_ObjectHideFlags: 0

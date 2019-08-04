@@ -24,6 +24,7 @@ public class PlayerMob : Mob
     float TimeForWalkSound { get; } = .375f;
     public AudioClip WalkSound;
     public AudioClip HurtSound;
+    public AudioClip DefeatSound;
 
     void Update()
     {
@@ -91,7 +92,15 @@ public class PlayerMob : Mob
         if (CurWalkTime > TimeForWalkSound)
         {
             CurWalkTime -= TimeForWalkSound;
-            SoundPlayer.PlayPitchAdjustedSound(WalkSound, .25f);
+
+            if (PhaseManager.CurrentGameState == GameState.Exhaustion)
+            {
+                SoundPlayer.PlayBoomingSound(WalkSound, .25f);
+            }
+            else
+            {
+                SoundPlayer.PlayPitchAdjustedSound(WalkSound, .25f);
+            }
         }
     }
 
@@ -137,6 +146,11 @@ public class PlayerMob : Mob
             {
                 PlayerSpriteRenderer.sprite = PlayerWizardDefeatedSprite;
                 PhaseManagerInstance.PlayerIsDefeated();
+                SoundPlayer.PlayPitchAdjustedSound(DefeatSound);
+            }
+            else
+            {
+                SoundPlayer.PlayPitchAdjustedSound(HurtSound);
             }
         }
         else if(PhaseManager.CurrentGameState == GameState.Exhaustion)
@@ -144,9 +158,10 @@ public class PlayerMob : Mob
             PlayerHealth = 0;
             PlayerSpriteRenderer.sprite = PlayerWizardExhaustedDefeatedSprite;
             PhaseManagerInstance.PlayerIsDefeated();
+            SoundPlayer.PlayPitchAdjustedSound(DefeatSound);
         }
 
-        SoundPlayer.PlayPitchAdjustedSound(HurtSound);
+        
     }
 
     public void ExhaustionState()

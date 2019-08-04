@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 7615836441321501878, guid: ff5e3b0738042e04c9066801dedca525,
         type: 3}
       propertyPath: m_Name
-      value: GiantEnemyFrog
+      value: GiantEnemyFrog Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7615836441321501883, guid: ff5e3b0738042e04c9066801dedca525,
         type: 3}
@@ -37,6 +37,11 @@ PrefabInstance:
         type: 3}
       propertyPath: FallingSpeed
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7615836441321501883, guid: ff5e3b0738042e04c9066801dedca525,
+        type: 3}
+      propertyPath: IsGiant
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7615836441321501882, guid: ff5e3b0738042e04c9066801dedca525,
         type: 3}
