@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMob : Mob
 {
-    const float MovementSpeed = 6.5f;
+    const float MovementSpeed = 6.25f;
     const float ExhaustionMovementSpeed = .35f;
 
     public PhaseManager PhaseManagerInstance;
@@ -112,7 +112,14 @@ public class PlayerMob : Mob
 
         if (PhaseManager.CurrentGameState == GameState.Exhaustion)
         {
-            CurWalkTime += Time.deltaTime * .25f;
+            if (MainMenuControl.SelectedLevel.FinalBossChapter)
+            {
+                CurWalkTime += Time.deltaTime * .45f; // make it a little faster to get the GEM OF BRAGGING RIGHTS
+            }
+            else
+            {
+                CurWalkTime += Time.deltaTime * .25f;
+            }
         }
         else
         {

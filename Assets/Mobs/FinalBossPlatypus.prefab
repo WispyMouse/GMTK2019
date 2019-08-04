@@ -179,14 +179,14 @@ MonoBehaviour:
     type: 3}
   IsGiant: 1
   DefeatSound: {fileID: 8300000, guid: 8d3e9dd45c3a0be47a82f2189bd5dcdc, type: 3}
-  MovementSpeed: 7
+  MovementSpeed: 8
   CrabChargeUp: {fileID: -3698688253108377412, guid: 1da0859efc9bd85499b8bbb14b57c8dc,
     type: 3}
   CrabAttack: {fileID: -3698688253108377412, guid: 1da0859efc9bd85499b8bbb14b57c8dc,
     type: 3}
   ChargeTime: 0.01
-  AttackTime: 0.45
-  RestTime: 0.4
+  AttackTime: 0.35
+  RestTime: 0.45
   CrabAttackSound: {fileID: 8300000, guid: 538bd22bfbff0f04ea978aba52bca65c, type: 3}
   GemOfBraggingRights: {fileID: 2944419633380504392, guid: cdc9a1ebb7893d7478ae2d0981d364d8,
     type: 3}
