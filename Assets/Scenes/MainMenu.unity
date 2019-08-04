@@ -313,7 +313,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 180, y: -125}
-  m_SizeDelta: {x: 250, y: 100}
+  m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &252950836
 MonoBehaviour:
@@ -666,7 +666,7 @@ GameObject:
   - component: {fileID: 591371094}
   - component: {fileID: 591371093}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: StoryPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -685,7 +685,7 @@ RectTransform:
   m_Children:
   - {fileID: 817108853}
   m_Father: {fileID: 1203319792}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -799,7 +799,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Play Muted
+  m_Text: 'Play
+
+    Without Sound'
 --- !u!222 &755343524
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -975,8 +977,8 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "Conquer the \u300CSEMI AQUATIC DUNGEON\u300D, slay the \u300CENIGMA BEAST\u300D
-    and retrieve the \u300CGEM OF BRAGGING RIGHTS\u300D.\n\nAll while only using only
-    one spell: \u300CEXPLOSION\u300D"
+    and retrieve the \u300CGEM OF BRAGGING RIGHTS\u300D, said to increase magical
+    power.\n\nAll while only using only one spell: \u300CEXPLOSION\u300D"
 --- !u!222 &817108856
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1338,8 +1340,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1690185283}
   - {fileID: 591371092}
+  - {fileID: 1690185283}
   m_Father: {fileID: 1938501178}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1859,7 +1861,7 @@ RectTransform:
   m_Children:
   - {fileID: 6858885479835266286}
   m_Father: {fileID: 1203319792}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2112,7 +2114,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -100, y: -125}
+  m_AnchoredPosition: {x: -80, y: -125}
   m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1883421660

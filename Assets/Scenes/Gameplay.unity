@@ -5847,7 +5847,6 @@ GameObject:
   m_Component:
   - component: {fileID: 581160645}
   - component: {fileID: 581160646}
-  - component: {fileID: 581160647}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -5917,66 +5916,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!108 &581160647
-Light:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 581160644}
-  m_Enabled: 1
-  serializedVersion: 9
-  m_Type: 2
-  m_Color: {r: 1, g: 0.049137097, b: 0, a: 1}
-  m_Intensity: 4
-  m_Range: 10
-  m_SpotAngle: 30
-  m_InnerSpotAngle: 21.80208
-  m_CookieSize: 10
-  m_Shadows:
-    m_Type: 0
-    m_Resolution: -1
-    m_CustomResolution: -1
-    m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
-    m_CullingMatrixOverride:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 0
-      e10: 0
-      e11: 1
-      e12: 0
-      e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
-  m_Flare: {fileID: 0}
-  m_RenderMode: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingLayerMask: 1
-  m_Lightmapping: 4
-  m_LightShadowCasterMode: 0
-  m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
-  m_UseBoundingSphereOverride: 0
-  m_ShadowRadius: 0
-  m_ShadowAngle: 0
 --- !u!1 &670677288
 GameObject:
   m_ObjectHideFlags: 0
@@ -11764,7 +11703,7 @@ MonoBehaviour:
     type: 3}
   EnemyCrabPF: {fileID: 2556889403962733159, guid: 416d5526c56b02d4c8462edf2f46861f,
     type: 3}
-  GiantEnemyCrabPF: {fileID: 165967044694565562, guid: 9576412413ea4754c8b133a175a39240,
+  GiantEnemyCrabPF: {fileID: 2393178834768252948, guid: 9576412413ea4754c8b133a175a39240,
     type: 3}
   EnemyFrogPF: {fileID: 7615836441321501883, guid: ff5e3b0738042e04c9066801dedca525,
     type: 3}
@@ -21573,6 +21512,9 @@ MonoBehaviour:
   WalkSound: {fileID: 8300000, guid: 6e9d8c66362d11c43ac50d2d57545c71, type: 3}
   HurtSound: {fileID: 8300000, guid: 497fa7b1270ea694bb303ece0f509cfc, type: 3}
   DefeatSound: {fileID: 8300000, guid: 825e127987d77704fbdc907db0488f4c, type: 3}
+  GemOfBraggingRightsSound: {fileID: 8300000, guid: eb6e3226bb9be7b4db7c16b12f1d32e6,
+    type: 3}
+  ExhaustionSound: {fileID: 8300000, guid: 00d0e50fb545d144d96e33de635f1b39, type: 3}
 --- !u!54 &1474509868
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -21931,6 +21873,7 @@ Transform:
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 581160645}
+  - {fileID: 2100715540}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -22100,6 +22043,7 @@ MonoBehaviour:
   LevelNameLabel: {fileID: 113089136}
   BigExplosionSound: {fileID: 8300000, guid: 44b43600bd6ff2c4ba9e15340aff30e5, type: 3}
   MenuSelectSound: {fileID: 8300000, guid: b37b98306be8ee24686697db7be47b03, type: 3}
+  VictorySound: {fileID: 8300000, guid: cbc7b6ec6265a664fb51c9d835b869f2, type: 3}
   VictoryWords:
   - Another Explosion,\nAnother Good Day
   - Got 'Em Coach
@@ -22347,6 +22291,97 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2072911703}
   m_CullTransparentMesh: 0
+--- !u!1 &2100715539
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2100715540}
+  - component: {fileID: 2100715541}
+  m_Layer: 0
+  m_Name: Light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2100715540
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100715539}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1567950742}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!108 &2100715541
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100715539}
+  m_Enabled: 1
+  serializedVersion: 9
+  m_Type: 2
+  m_Color: {r: 1, g: 0.049137097, b: 0, a: 1}
+  m_Intensity: 6
+  m_Range: 20
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!1 &2142420617
 GameObject:
   m_ObjectHideFlags: 0

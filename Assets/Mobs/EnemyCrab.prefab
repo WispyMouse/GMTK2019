@@ -57,14 +57,14 @@ MonoBehaviour:
     type: 3}
   IsGiant: 0
   DefeatSound: {fileID: 8300000, guid: 8d3e9dd45c3a0be47a82f2189bd5dcdc, type: 3}
-  MovementSpeed: 4.5
+  MovementSpeed: 4.75
   CrabChargeUp: {fileID: 2298374433165398522, guid: 8ae7355c43fd9af4a95599beb3517de2,
     type: 3}
   CrabAttack: {fileID: 1888593728279638935, guid: 8ae7355c43fd9af4a95599beb3517de2,
     type: 3}
-  ChargeTime: 0.25
-  AttackTime: 0.55
-  RestTime: 0.7
+  ChargeTime: 0.225
+  AttackTime: 0.65
+  RestTime: 0.65
   CrabAttackSound: {fileID: 8300000, guid: 7aaa800d21e72c943a8b432d54a2edd0, type: 3}
 --- !u!65 &1828307635
 BoxCollider:

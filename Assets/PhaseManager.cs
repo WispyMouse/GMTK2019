@@ -27,10 +27,12 @@ public class PhaseManager : MonoBehaviour
 
     Vector3 CameraOffsetFromPlayer { get; } = Vector3.up * 13f + Vector3.back * 4f;
     Vector3 CameraOffsetFromExplosionCursor { get; } = Vector3.up * 2.5f + Vector3.back * 5f;
+    Vector3 CameraOffsetFromExhaustedPlayer { get; } = Vector3.up * 7.5f + Vector3.back * 2f;
     float TimeForExplosionCursorCameraApproach { get; } = 1.3f;
     float StandardCameraDownTilt { get; } = 75f;
     float ExplosionCameraDowntilt { get; } = 10f;
-    float TimeForReturnToPlayerCameraApproach { get; } = .3f;
+    float TimeForReturnToPlayerCameraApproach { get; } = .9f;
+    bool FinishedPanningCamera { get; set; } = false;
 
     float ExplosionScale { get; set; } = 6f;
     float CurExhaustionTime { get; set; } = 0;
@@ -46,8 +48,8 @@ public class PhaseManager : MonoBehaviour
     int ExplosionHits { get; set; } = 0;
     bool PlayerHasStaff { get; set; } = false;
     public AudioClip BigExplosionSound;
-
     public AudioClip MenuSelectSound;
+    public AudioClip VictorySound;
 
     public List<string> VictoryWords;
     public List<string> DefeatWords;
@@ -122,6 +124,10 @@ public class PhaseManager : MonoBehaviour
         if (CurrentGameState == GameState.Movement)
         {
             Camera.main.transform.position = PlayerMobInstance.transform.position + CameraOffsetFromPlayer;
+        }
+        else if (CurrentGameState == GameState.Exhaustion && FinishedPanningCamera)
+        {
+            Camera.main.transform.position = Vector3.MoveTowards(Camera.main.transform.position, PlayerMobInstance.transform.position + CameraOffsetFromExhaustedPlayer, Time.deltaTime * 1f);
         }
     }
 
@@ -201,6 +207,7 @@ public class PhaseManager : MonoBehaviour
 
     void StartSafePhase()
     {
+        SoundPlayer.PlaySound(VictorySound);
         CurrentGameState = GameState.Safe;
         WaitCircle.fillAmount = 0f;
         FlavorLabel.text = VictoryWords[Random.Range(0, DefeatWords.Count)].Replace("\\n", "\n");
@@ -323,7 +330,17 @@ public class PhaseManager : MonoBehaviour
     {
         float currentCameraTime = 0;
         Vector3 startingCameraPosition = Camera.main.transform.position;
-        Vector3 targetPosition = PlayerMobInstance.transform.position + CameraOffsetFromPlayer;
+        Vector3 targetPosition = PlayerMobInstance.transform.position + CameraOffsetFromExhaustedPlayer;
+
+        while (currentCameraTime < TimeForReturnToPlayerCameraApproach / 2f)
+        {
+            currentCameraTime += Time.deltaTime;
+            Camera.main.transform.position = Vector3.Lerp(startingCameraPosition, targetPosition, currentCameraTime / TimeForReturnToPlayerCameraApproach);
+            Camera.main.transform.rotation = Quaternion.Euler(Mathf.Lerp(ExplosionCameraDowntilt, StandardCameraDownTilt, currentCameraTime / TimeForReturnToPlayerCameraApproach), 0, 0);
+            yield return new WaitForEndOfFrame();
+        }
+
+        StartExhaustionPhase();
 
         while (currentCameraTime < TimeForReturnToPlayerCameraApproach)
         {
@@ -335,8 +352,7 @@ public class PhaseManager : MonoBehaviour
 
         Camera.main.transform.position = targetPosition;
         Camera.main.transform.rotation = Quaternion.Euler(StandardCameraDownTilt, 0, 0);
-
-        StartExhaustionPhase();
+        FinishedPanningCamera = true;
     }
 
     public void PlayerIsDefeated()
@@ -366,6 +382,7 @@ public class PhaseManager : MonoBehaviour
 
     public void ReturnToLevelSelect()
     {
+        SoundPlayer.PlaySound(MenuSelectSound);
         MainMenuControl.ShowLevelSelect = true;
         SceneManager.LoadScene(0);
     }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMob : Mob
 {
     const float MovementSpeed = 6.5f;
-    const float ExhaustionMovementSpeed = .25f;
+    const float ExhaustionMovementSpeed = .35f;
 
     public PhaseManager PhaseManagerInstance;
     float HurtAnimationTime { get; } = .9f;
@@ -27,6 +27,8 @@ public class PlayerMob : Mob
     public AudioClip WalkSound;
     public AudioClip HurtSound;
     public AudioClip DefeatSound;
+    public AudioClip GemOfBraggingRightsSound;
+    public AudioClip ExhaustionSound;
 
     void Update()
     {
@@ -169,6 +171,7 @@ public class PlayerMob : Mob
     public void ExhaustionState()
     {
         PlayerSpriteRenderer.sprite = PlayerWizardExhaustedSprite;
+        SoundPlayer.PlaySound(ExhaustionSound);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -188,6 +191,7 @@ public class PlayerMob : Mob
         else if (GemOfBraggingRightsMask == (GemOfBraggingRightsMask | (1 << other.gameObject.layer)))
         {
             Destroy(other.gameObject);
+            SoundPlayer.PlaySound(GemOfBraggingRightsSound);
             PhaseManagerInstance.PlayerPicksUpGemOfBraggingRights();
         }
     }
