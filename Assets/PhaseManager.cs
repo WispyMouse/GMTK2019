@@ -226,6 +226,10 @@ public class PhaseManager : MonoBehaviour
         Vector3 targetPosition = RuneCursorInstance.transform.position + CameraOffsetFromExplosionCursor;
 
         PreExplosionParticleSystem.transform.position = RuneCursorInstance.transform.position;
+        ParticleSystem.MainModule main = PreExplosionParticleSystem.main;
+        main.startSpeed = -25f / 4f * ExplosionScale;
+        ParticleSystem.ShapeModule shape = PreExplosionParticleSystem.shape;
+        shape.radius = ExplosionScale;
         PreExplosionParticleSystem.gameObject.SetActive(true);
         PreExplosionParticleSystem.Play();
 
