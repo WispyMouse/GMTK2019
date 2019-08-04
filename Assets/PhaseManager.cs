@@ -19,6 +19,7 @@ public class PhaseManager : MonoBehaviour
     public LayerMask EnemyMask;
     public LevelManager LevelManagerInstance;
     public HealthManager HealthManagerInstance;
+    public GameObject ExplosionScorchMarkInstance;
 
     public Image WaitCircle;
     public Transform ExhaustionTimeHud;
@@ -255,6 +256,10 @@ public class PhaseManager : MonoBehaviour
         PostExplosionParticleSystem.transform.position = RuneCursorInstance.transform.position;
         PostExplosionParticleSystem.gameObject.SetActive(true);
         PostExplosionParticleSystem.Play();
+        ExplosionScorchMarkInstance.transform.position = RuneCursorInstance.transform.position;
+        ExplosionScorchMarkInstance.transform.rotation = Quaternion.Euler(0, Random.Range(0, 360f), 0);
+        ExplosionScorchMarkInstance.transform.localScale = Vector3.one * ExplosionScale;
+        ExplosionScorchMarkInstance.gameObject.SetActive(true);
 
         ExplosionInstance.transform.position = RuneCursorInstance.transform.position;
         ExplosionInstance.gameObject.SetActive(true);
