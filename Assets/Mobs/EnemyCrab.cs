@@ -59,8 +59,8 @@ public class EnemyCrab : EnemyMob
                 EnemySprite.sprite = CrabAttack;
 
                 Vector3 actualTarget = Vector3.MoveTowards(transform.position, PlayerMobInstance.transform.position, MovementSpeed * AttackTime);
-                float adjustedMagnitudeModifier = Mathf.Min(1.5f, Vector3.Distance(transform.position, actualTarget) * .3f);
-                AttackTarget = actualTarget + new Vector3(Random.Range(-adjustedMagnitudeModifier, adjustedMagnitudeModifier), 0, Random.Range(-adjustedMagnitudeModifier, adjustedMagnitudeModifier));
+                Vector3 randomCircle = Random.onUnitSphere;
+                AttackTarget = actualTarget + new Vector3(randomCircle.x * .45f, 0, randomCircle.z * .45f);
 
                 if (IsGiant)
                 {

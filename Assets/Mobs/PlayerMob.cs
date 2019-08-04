@@ -29,6 +29,7 @@ public class PlayerMob : Mob
     public AudioClip DefeatSound;
     public AudioClip GemOfBraggingRightsSound;
     public AudioClip ExhaustionSound;
+    public AudioClip StaffGet;
 
     void Update()
     {
@@ -185,7 +186,7 @@ public class PlayerMob : Mob
 
             PlayerSpriteRenderer.sprite = PlayerWizardWithStaffSprite;
             Destroy(other.gameObject);
-
+            SoundPlayer.PlayPitchAdjustedSound(StaffGet);
             PhaseManagerInstance.PlayerPicksUpStaff();
         }
         else if (GemOfBraggingRightsMask == (GemOfBraggingRightsMask | (1 << other.gameObject.layer)))

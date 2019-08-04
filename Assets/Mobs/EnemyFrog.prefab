@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8a887e58e1326b4086f68fc0d9b0f26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WallMask:
+  ObstructionMask:
     serializedVersion: 2
     m_Bits: 512
   MobSprite: {fileID: 7615836442895792599}

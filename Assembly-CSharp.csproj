@@ -62,6 +62,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\GlowyExplosionHudText.cs" />
     <Compile Include="Assets\HealthManager.cs" />
     <Compile Include="Assets\Levels\GameLevel.cs" />
     <Compile Include="Assets\Levels\LevelButton.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Assets\PhaseManager.cs" />
     <Compile Include="Assets\RuneCursor.cs" />
     <Compile Include="Assets\SoundPlayer.cs" />
+    <Compile Include="Assets\Terrain\Water.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/frost/Desktop/SourceControlled/GMTK2019/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

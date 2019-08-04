@@ -44,6 +44,7 @@ public class PhaseManager : MonoBehaviour
     public Button NextLevelButton;
     public Button AlwaysReturnToLevelSelect;
     public Text LevelNameLabel;
+    public Transform ExplosionStaffHud;
 
     int ExplosionHits { get; set; } = 0;
     bool PlayerHasStaff { get; set; } = false;
@@ -60,6 +61,7 @@ public class PhaseManager : MonoBehaviour
         ExhaustionTimeHud.gameObject.SetActive(false);
         PostRoundHud.gameObject.SetActive(false);
         RuneCursorInstance.gameObject.SetActive(false);
+        ExplosionStaffHud.gameObject.SetActive(false);
     }
 
     private void Start()
@@ -173,6 +175,7 @@ public class PhaseManager : MonoBehaviour
 
     void StartExplosionPhase()
     {
+        ExplosionStaffHud.gameObject.SetActive(false);
         CurrentGameState = GameState.Explosion;
         PlayerMobInstance.CastingState();
         StartCoroutine(ExplosionCameraApproach());
@@ -332,7 +335,7 @@ public class PhaseManager : MonoBehaviour
         Vector3 startingCameraPosition = Camera.main.transform.position;
         Vector3 targetPosition = PlayerMobInstance.transform.position + CameraOffsetFromExhaustedPlayer;
 
-        while (currentCameraTime < TimeForReturnToPlayerCameraApproach / 2f)
+        while (currentCameraTime < TimeForReturnToPlayerCameraApproach * .7f)
         {
             currentCameraTime += Time.deltaTime;
             Camera.main.transform.position = Vector3.Lerp(startingCameraPosition, targetPosition, currentCameraTime / TimeForReturnToPlayerCameraApproach);
@@ -390,6 +393,7 @@ public class PhaseManager : MonoBehaviour
     public void PlayerPicksUpStaff()
     {
         PlayerHasStaff = true;
+        ExplosionStaffHud.gameObject.SetActive(true);
     }
 
     public void PlayerPicksUpGemOfBraggingRights()

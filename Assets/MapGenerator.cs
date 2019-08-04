@@ -10,6 +10,7 @@ public class MapGenerator : MonoBehaviour
     public GameObject WallPF;
     public GameObject TallWallPF;
     public GameObject ExplosionStaffPF;
+    public GameObject WaterPF;
 
     public EnemyCrab EnemyCrabPF;
     public EnemyCrab GiantEnemyCrabPF;
@@ -47,6 +48,10 @@ public class MapGenerator : MonoBehaviour
                 if (ColorAtPixel == new Color(128f / 255f, 128f / 255f, 128f / 255f))
                 {
                     // this space intentionally left blank
+                }
+                else if (ColorAtPixel == new Color(63f / 255f, 127f / 255f, 127f / 255f))
+                {
+                    Instantiate(WaterPF, position, Quaternion.identity, transform);
                 }
                 else
                 {

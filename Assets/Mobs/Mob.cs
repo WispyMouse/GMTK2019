@@ -6,7 +6,7 @@ public class Mob : MonoBehaviour
 {
     // Unity doesn't like it when you're *too* close to things
     float PlanckDistance = .001f;
-    public LayerMask WallMask;
+    public LayerMask ObstructionMask;
     public SpriteRenderer MobSprite;
 
     protected void Walk(Vector3 toWalk)
@@ -17,7 +17,7 @@ public class Mob : MonoBehaviour
 
         if (toWalk.x != 0)
         {
-            if (Physics.SphereCast(transform.position, .5f - PlanckDistance, Vector3.right * Mathf.Sign(toWalk.x), out raycastHit, Mathf.Abs(toWalk.x), WallMask))
+            if (Physics.SphereCast(transform.position, .5f - PlanckDistance, Vector3.right * Mathf.Sign(toWalk.x), out raycastHit, Mathf.Abs(toWalk.x), ObstructionMask))
             {
                 workingMovementDelta.x = (raycastHit.distance - PlanckDistance) * Mathf.Sign(toWalk.x);
             }
@@ -29,7 +29,7 @@ public class Mob : MonoBehaviour
 
         if (toWalk.z != 0)
         {
-            if (Physics.SphereCast(transform.position, .5f - PlanckDistance, Vector3.forward * Mathf.Sign(toWalk.z), out raycastHit, Mathf.Abs(toWalk.z), WallMask))
+            if (Physics.SphereCast(transform.position, .5f - PlanckDistance, Vector3.forward * Mathf.Sign(toWalk.z), out raycastHit, Mathf.Abs(toWalk.z), ObstructionMask))
             {
                 workingMovementDelta.z = (raycastHit.distance - PlanckDistance) * Mathf.Sign(toWalk.z);
             }

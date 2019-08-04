@@ -44,7 +44,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.8
-  m_Pitch: 0.65
+  m_Pitch: 0.7
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -117,7 +117,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.735
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -298,7 +298,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.6
-  m_Pitch: 1.05
+  m_Pitch: 1.1
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -736,7 +736,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.6
-  m_Pitch: 1.1
+  m_Pitch: 1.2
   Loop: 0
   Mute: 0
   Spatialize: 0

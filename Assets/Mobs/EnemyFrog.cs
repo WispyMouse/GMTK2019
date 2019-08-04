@@ -91,7 +91,8 @@ public class EnemyFrog : EnemyMob
                 AttackStage = AttackPattern.Land;
                 EnemySprite.sprite = FrogFalling;
 
-                FrogShadow.transform.position = PlayerMobInstance.transform.position + new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
+                Vector3 randomCircle = Random.onUnitSphere;
+                FrogShadow.transform.position = PlayerMobInstance.transform.position + new Vector3(randomCircle.x * .5f, 0, randomCircle.z * .5f);
                 transform.position = FrogShadow.transform.position + Vector3.up * FallingSpeed * FallingTime;
 
                 if (IsGiant)
