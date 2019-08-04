@@ -19,6 +19,8 @@ public class EnemyMob : Mob
     float timeForRotationStartup { get; } = .25f;
     float timeForDefeatAnimation { get; set; }
 
+    public AudioClip DefeatSound;
+
     private void Awake()
     {
         FacesCameraComponent = GetComponentInChildren<FacesCamera>();
@@ -46,6 +48,7 @@ public class EnemyMob : Mob
     {
         float currentAnimationTime = 0f;
         float rotationDirection = transform.position.x < explosionEpicenter.x ? -1f : 1f;
+        SoundPlayer.PlayPitchAdjustedSound(DefeatSound);
 
         Vector3 startingPosition = transform.position;
 

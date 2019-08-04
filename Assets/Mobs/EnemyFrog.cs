@@ -23,6 +23,9 @@ public class EnemyFrog : EnemyMob
     float CurPhaseTime { get; set; } = 0f;
     AttackPattern AttackStage { get; set; } = AttackPattern.Rest;
 
+    public AudioClip FrogJumpUpSound;
+    public AudioClip FrogLandSound;
+
     private void Start()
     {
         FrogShadow = Instantiate(FrogShadowPF);
@@ -67,6 +70,7 @@ public class EnemyFrog : EnemyMob
                 CurPhaseTime -= ChargeTime;
                 AttackStage = AttackPattern.Jump;
                 EnemySprite.sprite = FrogJumping;
+                SoundPlayer.PlayPitchAdjustedSound(FrogJumpUpSound, .25f);
             }
         }
         else if (AttackStage == AttackPattern.Jump)
@@ -81,6 +85,7 @@ public class EnemyFrog : EnemyMob
 
                 FrogShadow.transform.position = PlayerMobInstance.transform.position + new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
                 transform.position = FrogShadow.transform.position + Vector3.up * FallingSpeed * FallingTime;
+                SoundPlayer.PlayPitchAdjustedSound(FrogLandSound, .25f);
             }
         }
         else if (AttackStage == AttackPattern.Land)

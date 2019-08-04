@@ -55,6 +55,7 @@ MonoBehaviour:
     type: 3}
   KOSprite: {fileID: 3336221523516516871, guid: 8ae7355c43fd9af4a95599beb3517de2,
     type: 3}
+  DefeatSound: {fileID: 8300000, guid: 8d3e9dd45c3a0be47a82f2189bd5dcdc, type: 3}
   MovementSpeed: 4.5
   CrabChargeUp: {fileID: 2298374433165398522, guid: 8ae7355c43fd9af4a95599beb3517de2,
     type: 3}
@@ -63,6 +64,7 @@ MonoBehaviour:
   ChargeTime: 0.25
   AttackTime: 0.55
   RestTime: 0.7
+  CrabAttackSound: {fileID: 8300000, guid: 7aaa800d21e72c943a8b432d54a2edd0, type: 3}
 --- !u!65 &1828307635
 BoxCollider:
   m_ObjectHideFlags: 0

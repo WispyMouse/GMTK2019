@@ -18,6 +18,8 @@ public class EnemyCrab : EnemyMob
     AttackPattern AttackStage { get; set; } = AttackPattern.Rest;
     Vector3 AttackTarget { get; set; }
 
+    public AudioClip CrabAttackSound;
+
     private void Start()
     {
         CurPhaseTime = Random.Range(0f, .15f);
@@ -59,6 +61,7 @@ public class EnemyCrab : EnemyMob
                 Vector3 actualTarget = Vector3.MoveTowards(transform.position, PlayerMobInstance.transform.position, MovementSpeed * AttackTime);
                 float adjustedMagnitudeModifier = Mathf.Min(1.5f, Vector3.Distance(transform.position, actualTarget) * .3f);
                 AttackTarget = actualTarget + new Vector3(Random.Range(-adjustedMagnitudeModifier, adjustedMagnitudeModifier), 0, Random.Range(-adjustedMagnitudeModifier, adjustedMagnitudeModifier));
+                SoundPlayer.PlayPitchAdjustedSound(CrabAttackSound, .25f);
             }
         }
         else if(AttackStage == AttackPattern.Attack)

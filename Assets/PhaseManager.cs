@@ -40,6 +40,9 @@ public class PhaseManager : MonoBehaviour
 
     int ExplosionHits { get; set; } = 0;
     bool PlayerHasStaff { get; set; } = false;
+    public AudioClip BigExplosionSound;
+
+    public AudioClip MenuSelectSound;
 
     public List<string> VictoryWords;
     public List<string> DefeatWords;
@@ -236,6 +239,7 @@ public class PhaseManager : MonoBehaviour
         ExplosionInstance.transform.position = RuneCursorInstance.transform.position;
         ExplosionInstance.transform.localScale = Vector3.one * ExplosionScale;
         ExplosionInstance.gameObject.SetActive(true);
+        SoundPlayer.PlaySound(BigExplosionSound);
         yield return new WaitForSeconds(.6f);
 
         Collider[] enemyHits = Physics.OverlapSphere(RuneCursorInstance.transform.position, ExplosionScale * .5f, EnemyMask, QueryTriggerInteraction.Collide);
@@ -280,17 +284,20 @@ public class PhaseManager : MonoBehaviour
 
     public void LevelSelectButton()
     {
+        SoundPlayer.PlaySound(MenuSelectSound);
         MainMenuControl.ShowLevelSelect = true;
         SceneManager.LoadScene(0);
     }
 
     public void RetryButton()
     {
+        SoundPlayer.PlaySound(MenuSelectSound);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void ToNextLevelButton()
     {
+        SoundPlayer.PlaySound(MenuSelectSound);
         MainMenuControl.SelectedLevel = LevelManagerInstance.GetLevel(MainMenuControl.SelectedLevel.LevelIndex + 1);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }

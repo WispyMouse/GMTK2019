@@ -2151,6 +2151,8 @@ MonoBehaviour:
   ExplosionStaffMask:
     serializedVersion: 2
     m_Bits: 4096
+  WalkSound: {fileID: 8300000, guid: 6e9d8c66362d11c43ac50d2d57545c71, type: 3}
+  HurtSound: {fileID: 8300000, guid: 497fa7b1270ea694bb303ece0f509cfc, type: 3}
 --- !u!54 &1474509868
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2671,6 +2673,8 @@ MonoBehaviour:
   NextLevelButton: {fileID: 108119021}
   AlwaysReturnToLevelSelect: {fileID: 821531232}
   LevelNameLabel: {fileID: 113089136}
+  BigExplosionSound: {fileID: 8300000, guid: 44b43600bd6ff2c4ba9e15340aff30e5, type: 3}
+  MenuSelectSound: {fileID: 8300000, guid: b37b98306be8ee24686697db7be47b03, type: 3}
   VictoryWords:
   - Another Explosion,\nAnother Good Day
   - Got 'Em Coach
@@ -3066,3 +3070,92 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5d4437eaf9ccfc42904a77fcd0c7815, type: 3}
+--- !u!1001 &2994656608779785013
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2994656609042535382, guid: 47690e2fee88c8341be8dc8a36b89d2b,
+        type: 3}
+      propertyPath: m_Name
+      value: SoundPlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 2994656609042535376, guid: 47690e2fee88c8341be8dc8a36b89d2b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2994656609042535376, guid: 47690e2fee88c8341be8dc8a36b89d2b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2994656609042535376, guid: 47690e2fee88c8341be8dc8a36b89d2b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2994656609042535376, guid: 47690e2fee88c8341be8dc8a36b89d2b,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2994656609042535376, guid: 47690e2fee88c8341be8dc8a36b89d2b,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2994656609042535376, guid: 47690e2fee88c8341be8dc8a36b89d2b,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2994656609042535376, guid: 47690e2fee88c8341be8dc8a36b89d2b,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2994656609042535376, guid: 47690e2fee88c8341be8dc8a36b89d2b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2994656609042535376, guid: 47690e2fee88c8341be8dc8a36b89d2b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2994656609042535376, guid: 47690e2fee88c8341be8dc8a36b89d2b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2994656609042535376, guid: 47690e2fee88c8341be8dc8a36b89d2b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2998077474569231753, guid: 47690e2fee88c8341be8dc8a36b89d2b,
+        type: 3}
+      propertyPath: m_Pitch
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5258205414665722076, guid: 47690e2fee88c8341be8dc8a36b89d2b,
+        type: 3}
+      propertyPath: m_Pitch
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4218580253326134578, guid: 47690e2fee88c8341be8dc8a36b89d2b,
+        type: 3}
+      propertyPath: m_Pitch
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4939903358975896300, guid: 47690e2fee88c8341be8dc8a36b89d2b,
+        type: 3}
+      propertyPath: m_Pitch
+      value: 1.2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 47690e2fee88c8341be8dc8a36b89d2b, type: 3}

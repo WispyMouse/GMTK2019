@@ -20,6 +20,11 @@ public class PlayerMob : Mob
     public Sprite PlayerWizardWithStaffSprite;
     public LayerMask ExplosionStaffMask;
 
+    float CurWalkTime { get; set; } = 0;
+    float TimeForWalkSound { get; } = .375f;
+    public AudioClip WalkSound;
+    public AudioClip HurtSound;
+
     void Update()
     {
         switch (PhaseManager.CurrentGameState)
@@ -59,6 +64,7 @@ public class PlayerMob : Mob
 
         if (movementInput == Vector3.zero)
         {
+            CurWalkTime = Mathf.Max(CurWalkTime, TimeForWalkSound * .75f);
             return;
         }
 
@@ -72,6 +78,21 @@ public class PlayerMob : Mob
         }
 
         Walk(movementInput * Time.deltaTime * curMovementSpeed);
+
+        if (PhaseManager.CurrentGameState == GameState.Exhaustion)
+        {
+            CurWalkTime += Time.deltaTime * .25f;
+        }
+        else
+        {
+            CurWalkTime += Time.deltaTime;
+        }
+
+        if (CurWalkTime > TimeForWalkSound)
+        {
+            CurWalkTime -= TimeForWalkSound;
+            SoundPlayer.PlayPitchAdjustedSound(WalkSound, .25f);
+        }
     }
 
     void HandleHurtTime()
@@ -124,6 +145,8 @@ public class PlayerMob : Mob
             PlayerSpriteRenderer.sprite = PlayerWizardExhaustedDefeatedSprite;
             PhaseManagerInstance.PlayerIsDefeated();
         }
+
+        SoundPlayer.PlayPitchAdjustedSound(HurtSound);
     }
 
     public void ExhaustionState()

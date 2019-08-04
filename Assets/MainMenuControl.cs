@@ -24,6 +24,8 @@ public class MainMenuControl : MonoBehaviour
 
     public List<Transform> RuneCircles;
 
+    public AudioClip MenuSelectSound;
+
     private void Awake()
     {
         FirstMenu.gameObject.SetActive(!ShowLevelSelect);
@@ -47,12 +49,20 @@ public class MainMenuControl : MonoBehaviour
     {
         FirstMenu.gameObject.SetActive(false);
         LevelSelection.gameObject.SetActive(true);
+        SoundPlayer.PlaySound(MenuSelectSound);
+    }
+
+    public void StartGameWithoutSoundButton()
+    {
+        SoundPlayer.MuteSound();
+        StartGameButton();
     }
 
     public void LevelSelected(GameLevel selected)
     {
         SelectedLevel = selected;
         SceneManager.LoadScene(1);
+        SoundPlayer.PlaySound(MenuSelectSound);
     }
 
     void EstablishLevelSelect()

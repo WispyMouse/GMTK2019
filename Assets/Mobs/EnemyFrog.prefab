@@ -55,6 +55,7 @@ MonoBehaviour:
     type: 3}
   KOSprite: {fileID: -1622413195567345253, guid: 26626784b1cec714ea02dfc9cac6eb2f,
     type: 3}
+  DefeatSound: {fileID: 8300000, guid: 8d3e9dd45c3a0be47a82f2189bd5dcdc, type: 3}
   FrogShadowPF: {fileID: 6537443572430034760, guid: a4963e049e4e23045b0174f5a37d20c7,
     type: 3}
   FrogCharge: {fileID: 1178858361488861917, guid: 26626784b1cec714ea02dfc9cac6eb2f,
@@ -69,6 +70,8 @@ MonoBehaviour:
   FallingTime: 0.75
   RisingSpeed: 20
   FallingSpeed: 9
+  FrogJumpUpSound: {fileID: 8300000, guid: ae28075b218ac7946990672f6a022050, type: 3}
+  FrogLandSound: {fileID: 8300000, guid: 1999d52704d18104ea7c7b02f07d04e5, type: 3}
 --- !u!54 &7615836441321501876
 Rigidbody:
   m_ObjectHideFlags: 0
