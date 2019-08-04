@@ -18,6 +18,11 @@ public class EnemyCrab : EnemyMob
     AttackPattern AttackStage { get; set; } = AttackPattern.Rest;
     Vector3 AttackTarget { get; set; }
 
+    private void Start()
+    {
+        CurPhaseTime = Random.Range(0f, .15f);
+    }
+
     private void Update()
     {
         switch (PhaseManager.CurrentGameState)
@@ -38,7 +43,7 @@ public class EnemyCrab : EnemyMob
         {
             if (CurPhaseTime > RestTime)
             {
-                CurPhaseTime = 0;
+                CurPhaseTime -= RestTime;
                 AttackStage = AttackPattern.Charge;
                 EnemySprite.sprite = CrabChargeUp;
             }
@@ -47,7 +52,7 @@ public class EnemyCrab : EnemyMob
         {
             if (CurPhaseTime > ChargeTime)
             {
-                CurPhaseTime = 0;
+                CurPhaseTime -= ChargeTime;
                 AttackStage = AttackPattern.Attack;
                 EnemySprite.sprite = CrabAttack;
 
@@ -63,7 +68,7 @@ public class EnemyCrab : EnemyMob
 
             if (CurPhaseTime > AttackTime)
             {
-                CurPhaseTime = 0;
+                CurPhaseTime -= AttackTime;
                 AttackStage = AttackPattern.Rest;
                 EnemySprite.sprite = NeutralSprite;
             }

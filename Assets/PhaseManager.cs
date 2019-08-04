@@ -243,8 +243,8 @@ public class PhaseManager : MonoBehaviour
 
         for (int ii = 0; ii < enemyHits.Length; ii++)
         {
-            EnemyCrab hitCrab = enemyHits[ii].gameObject.GetComponent<EnemyCrab>();
-            yield return hitCrab.DefeatAnimationStartup(ExplosionInstance.transform.position);
+            EnemyMob hitEnemy = enemyHits[ii].gameObject.GetComponent<EnemyMob>();
+            yield return hitEnemy.DefeatAnimationStartup(ExplosionInstance.transform.position);
         }
 
         yield return new WaitForSeconds(.4f);

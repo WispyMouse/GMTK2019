@@ -16,7 +16,8 @@ public class EnemyFrog : EnemyMob
 
     public float RestTime;
     public float ChargeTime;
-    public float FullJumpTime;
+    public float RisingTime;
+    public float FallingTime;
     public float RisingSpeed;
     public float FallingSpeed;
     float CurPhaseTime { get; set; } = 0f;
@@ -26,10 +27,16 @@ public class EnemyFrog : EnemyMob
     {
         FrogShadow = Instantiate(FrogShadowPF);
         FrogShadow.transform.position = transform.position;
+        CurPhaseTime = Random.Range(0f, .15f);
     }
 
     private void Update()
     {
+        if (!EnemyActive)
+        {
+            FrogShadow.SetActive(false);
+        }
+
         switch (PhaseManager.CurrentGameState)
         {
             case GameState.Movement:
@@ -48,7 +55,7 @@ public class EnemyFrog : EnemyMob
         {
             if (CurPhaseTime > RestTime)
             {
-                CurPhaseTime = 0;
+                CurPhaseTime -= RestTime;
                 AttackStage = AttackPattern.Charge;
                 EnemySprite.sprite = FrogCharge;
             }
@@ -57,34 +64,32 @@ public class EnemyFrog : EnemyMob
         {
             if (CurPhaseTime > ChargeTime)
             {
-                CurPhaseTime = 0;
+                CurPhaseTime -= ChargeTime;
                 AttackStage = AttackPattern.Jump;
                 EnemySprite.sprite = FrogJumping;
-                EnemyCanHurt = false;
             }
         }
         else if (AttackStage == AttackPattern.Jump)
         {
             transform.position = transform.position + Vector3.up * Time.deltaTime * RisingSpeed;
 
-            if (CurPhaseTime > FullJumpTime / 2f)
+            if (CurPhaseTime > RisingTime)
             {
-                CurPhaseTime = 0;
+                CurPhaseTime -= RisingTime;
                 AttackStage = AttackPattern.Land;
                 EnemySprite.sprite = FrogFalling;
 
                 FrogShadow.transform.position = PlayerMobInstance.transform.position + new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
-                transform.position = FrogShadow.transform.position + Vector3.up * FallingSpeed * FullJumpTime / 2f;
-                EnemyCanHurt = true;
+                transform.position = FrogShadow.transform.position + Vector3.up * FallingSpeed * FallingTime;
             }
         }
         else if (AttackStage == AttackPattern.Land)
         {
             transform.position = Vector3.MoveTowards(transform.position, FrogShadow.transform.position, Time.deltaTime * FallingSpeed);
 
-            if (CurPhaseTime > FullJumpTime)
+            if (CurPhaseTime > FallingTime)
             {
-                CurPhaseTime = 0;
+                CurPhaseTime -= FallingTime;
                 AttackStage = AttackPattern.Rest;
                 EnemySprite.sprite = NeutralSprite;
             }

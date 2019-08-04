@@ -63,10 +63,11 @@ MonoBehaviour:
     type: 3}
   FrogFalling: {fileID: -5261642204031683897, guid: 26626784b1cec714ea02dfc9cac6eb2f,
     type: 3}
-  RestTime: 0.6
-  ChargeTime: 0.5
-  FullJumpTime: 2.9
-  RisingSpeed: 16
+  RestTime: 0.3
+  ChargeTime: 0.6
+  RisingTime: 1
+  FallingTime: 0.75
+  RisingSpeed: 20
   FallingSpeed: 9
 --- !u!54 &7615836441321501876
 Rigidbody:

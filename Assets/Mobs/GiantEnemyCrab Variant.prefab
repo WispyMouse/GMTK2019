@@ -14,11 +14,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2556889403962733159, guid: 416d5526c56b02d4c8462edf2f46861f,
         type: 3}
-      propertyPath: RestTime
-      value: 1.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2556889403962733159, guid: 416d5526c56b02d4c8462edf2f46861f,
-        type: 3}
       propertyPath: MovementSpeed
       value: 5.5
       objectReference: {fileID: 0}

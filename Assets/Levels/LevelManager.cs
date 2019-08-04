@@ -40,6 +40,12 @@ public class LevelManager : MonoBehaviour
     public void ClearLevel(GameLevel toClear, int explosionScore)
     {
         PlayerPrefs.SetInt(toClear.LevelIndex + "Clear", 1);
-        PlayerPrefs.SetInt(toClear.LevelName + "ExplosionScore", explosionScore);
+
+        int previousScore = PlayerPrefs.GetInt(toClear.LevelName + "ExplosionScore", 0);
+
+        if (explosionScore > previousScore)
+        {
+            PlayerPrefs.SetInt(toClear.LevelName + "ExplosionScore", explosionScore);
+        }
     }
 }

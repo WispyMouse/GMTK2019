@@ -5,7 +5,6 @@ using UnityEngine;
 public class EnemyMob : Mob
 {
     public bool EnemyActive { get; protected set; } = true;
-    public bool EnemyCanHurt { get; protected set; } = true;
 
     public SpriteRenderer EnemySprite;
     public Sprite NeutralSprite;
@@ -96,7 +95,7 @@ public class EnemyMob : Mob
             return;
         }
 
-        if (!EnemyActive || !EnemyCanHurt)
+        if (!EnemyActive)
         {
             return;
         }

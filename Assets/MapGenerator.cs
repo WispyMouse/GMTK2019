@@ -14,6 +14,7 @@ public class MapGenerator : MonoBehaviour
     public EnemyCrab EnemyCrabPF;
     public EnemyCrab GiantEnemyCrabPF;
     public EnemyFrog EnemyFrogPF;
+    public EnemyFrog GiantEnemyFrogPF;
 
     public GameObject WASDRunePF;
     public GameObject RightClickRunePF;
@@ -66,6 +67,11 @@ public class MapGenerator : MonoBehaviour
                     else if (ColorAtPixel == new Color(76f / 255f, 255f / 255f, 0, 1f))
                     {
                         EnemyFrog newFrog = Instantiate(EnemyFrogPF, position, Quaternion.identity, transform);
+                        newFrog.PlayerMobInstance = PlayerMobInstance;
+                    }
+                    else if (ColorAtPixel == new Color(0, 255f / 255f, 144f / 255f, 1f))
+                    {
+                        EnemyFrog newFrog = Instantiate(GiantEnemyFrogPF, position, Quaternion.identity, transform);
                         newFrog.PlayerMobInstance = PlayerMobInstance;
                     }
                     else if (spawnDictionary.ContainsKey(ColorAtPixel))
