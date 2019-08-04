@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenuControl : MonoBehaviour
 {
@@ -12,6 +13,12 @@ public class MainMenuControl : MonoBehaviour
     public Color ColorOne;
     public Color ColorTwo;
     float CurColorTime { get; set; }
+
+    public Color MintColorOne;
+    public Color MintColorTwo;
+    float CurMintColorTime;
+    float MintColorPongTime { get; set; } = 1f;
+    public Text CreditsText;
 
     float ColorPongTime { get; set; } = 8f;
     float RotationSpeed { get; set; } = 10f;
@@ -37,12 +44,16 @@ public class MainMenuControl : MonoBehaviour
     private void Update()
     {
         CurColorTime += Time.deltaTime;
+        CurMintColorTime += Time.deltaTime;
         ActiveCamera.backgroundColor = Color.Lerp(ColorOne, ColorTwo, Mathf.PingPong(CurColorTime, ColorPongTime) / ColorPongTime);
 
         foreach (Transform circle in RuneCircles)
         {
             circle.transform.rotation = Quaternion.Euler(0, 0, circle.transform.rotation.eulerAngles.z + Time.deltaTime * RotationSpeed);
         }
+
+        Color curColor = Color.Lerp(MintColorOne, MintColorTwo, Mathf.PingPong(CurMintColorTime, MintColorPongTime) / MintColorPongTime);
+        CreditsText.text = $"Made by <color=#{ColorUtility.ToHtmlStringRGB(curColor)}>Mint</color> for GMTK 2019\n\n@WispyMouse";
     }
 
     public void StartGameButton()
